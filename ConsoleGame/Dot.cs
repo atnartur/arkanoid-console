@@ -6,9 +6,9 @@ namespace ConsoleGame
     {
         public char Symbol { get; set; }
 
-        public Dot()
+        public Dot(char symbol = ' ')
         {
-            Symbol = '=';
+            Symbol = symbol;
         }
 
         public override String ToString()

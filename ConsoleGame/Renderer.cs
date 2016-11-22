@@ -9,14 +9,15 @@ namespace ConsoleGame
         private int height;
         private bool is_start = false;
         private Dot[,] world;
+        public KeyBindings Bindings = new KeyBindings();
 
         public Renderer()
         {
             width = Console.WindowWidth;
             height = Console.WindowHeight;
 
-            CursorCurrentPosition.Set(width / 2, height / 2);
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
+//            CursorCurrentPosition.Set(width / 2, height / 2);
+            SetBackgroundColor(ConsoleColor.DarkBlue);
 
             world = new Dot[height, width];
 
@@ -24,10 +25,16 @@ namespace ConsoleGame
                 for (int j = 0; j < world.GetLength(1); j++)
                     world[i, j] = new Dot();
 
-
             Draw();
             Update();
         }
+
+
+        /// <summary>
+        /// Установка фонового цвета консоли
+        /// </summary>
+        /// <param name="color">цвет из System.ConsoleColor</param>
+        public void SetBackgroundColor(ConsoleColor color) => Console.BackgroundColor = color;
 
         /// <summary>
         /// Запуск перерисовки
@@ -54,24 +61,30 @@ namespace ConsoleGame
         /// </summary>
         public void Update()
         {
+            ConsoleKey key = Console.ReadKey(true).Key;
+
+
+
+            KeyBindings.Exec(key);
+
             switch (Console.ReadKey(true).Key)
             {
-                case ConsoleKey.UpArrow:
-                    if(CursorCurrentPosition.Y < Console.WindowHeight - 1)
-                        CursorCurrentPosition.Y++;
-                    break;
-                case ConsoleKey.DownArrow:
-                    if(CursorCurrentPosition.Y > 0)
-                        CursorCurrentPosition.Y--;
-                    break;
-                case ConsoleKey.RightArrow:
-                    if(CursorCurrentPosition.X < Console.WindowWidth - 1)
-                        CursorCurrentPosition.X++;
-                    break;
-                case ConsoleKey.LeftArrow:
-                    if(CursorCurrentPosition.X > 0)
-                        CursorCurrentPosition.X--;
-                    break;
+//                case ConsoleKey.UpArrow:
+//                    if(CursorCurrentPosition.Y < Console.WindowHeight - 1)
+//                        CursorCurrentPosition.Y++;
+//                    break;
+//                case ConsoleKey.DownArrow:
+//                    if(CursorCurrentPosition.Y > 0)
+//                        CursorCurrentPosition.Y--;
+//                    break;
+//                case ConsoleKey.RightArrow:
+//                    if(CursorCurrentPosition.X < Console.WindowWidth - 1)
+//                        CursorCurrentPosition.X++;
+//                    break;
+//                case ConsoleKey.LeftArrow:
+//                    if(CursorCurrentPosition.X > 0)
+//                        CursorCurrentPosition.X--;
+//                    break;
                 case ConsoleKey.Q:
                     is_start = false;
                     break;
@@ -86,7 +99,8 @@ namespace ConsoleGame
         /// </summary>
         public void Draw()
         {
-            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+//            Console.Clear();
 //            UpdateCursorPosition();
             DrawCursorAsSymbol();
         }
@@ -102,20 +116,7 @@ namespace ConsoleGame
                 for (int j = 0; j < world.GetLength(1); j++){
                     Console.Write(world[i, j]);
                 }
-                Console.WriteLine();
             }
-
-//            for(int y = Console.WindowHeight - 1; y > 0; y--)
-//            {
-//                for(int x = 0; x < Console.WindowWidth; x++)
-//                {
-//                    if(CursorCurrentPosition.Equals(x, y))
-//                        Console.Write("=");
-//                    else
-//                        Console.Write(" ");
-//                }
-//                Console.WriteLine();
-//            }
         }
 
         /// <summary>

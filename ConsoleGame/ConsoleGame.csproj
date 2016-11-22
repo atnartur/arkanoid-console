@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dot.cs" />
+    <Compile Include="KeyBinding.cs" />
+    <Compile Include="KeyBindings.cs" />
     <Compile Include="Renderer.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
