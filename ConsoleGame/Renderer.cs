@@ -5,12 +5,25 @@ namespace ConsoleGame
     public class Renderer
     {
         readonly Vector2D CursorCurrentPosition = new Vector2D();
+        private int width;
+        private int height;
         private bool is_start = false;
+        private Dot[,] world;
 
         public Renderer()
         {
-            CursorCurrentPosition.Set(Console.WindowWidth / 2, Console.WindowHeight / 2);
+            width = Console.WindowWidth;
+            height = Console.WindowHeight;
+
+            CursorCurrentPosition.Set(width / 2, height / 2);
             Console.BackgroundColor = ConsoleColor.DarkBlue;
+
+            world = new Dot[height, width];
+
+            for(int i = 0; i < world.GetLength(0); i++)
+                for (int j = 0; j < world.GetLength(1); j++)
+                    world[i, j] = new Dot();
+
 
             Draw();
             Update();
@@ -83,17 +96,26 @@ namespace ConsoleGame
         /// </summary>
         public void DrawCursorAsSymbol()
         {
-            for(int y = Console.WindowHeight - 1; y > 0; y--)
+
+            for(int i = 0; i < world.GetLength(0); i++)
             {
-                for(int x = 0; x < Console.WindowWidth; x++)
-                {
-                    if(CursorCurrentPosition.Equals(x, y))
-                        Console.Write("=");
-                    else
-                        Console.Write(" ");
+                for (int j = 0; j < world.GetLength(1); j++){
+                    Console.Write(world[i, j]);
                 }
                 Console.WriteLine();
             }
+
+//            for(int y = Console.WindowHeight - 1; y > 0; y--)
+//            {
+//                for(int x = 0; x < Console.WindowWidth; x++)
+//                {
+//                    if(CursorCurrentPosition.Equals(x, y))
+//                        Console.Write("=");
+//                    else
+//                        Console.Write(" ");
+//                }
+//                Console.WriteLine();
+//            }
         }
 
         /// <summary>
