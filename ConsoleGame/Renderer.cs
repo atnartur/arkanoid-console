@@ -7,14 +7,14 @@ namespace ConsoleGame
         readonly Vector2D CursorCurrentPosition = new Vector2D();
         private int width;
         private int height;
-        private bool is_start = false;
+        private bool is_animation_start = false;
         private Dot[,] world;
         public KeyBindings Bindings = new KeyBindings();
 
         public Renderer()
         {
             width = Console.WindowWidth;
-            height = Console.WindowHeight;
+            height = Console.WindowHeight-2;
 
 //            CursorCurrentPosition.Set(width / 2, height / 2);
             SetBackgroundColor(ConsoleColor.DarkBlue);
@@ -25,6 +25,7 @@ namespace ConsoleGame
                 for (int j = 0; j < world.GetLength(1); j++)
                     world[i, j] = new Dot();
 
+            KeyHandlers.Attach(Bindings);
             Draw();
             Update();
         }
@@ -42,11 +43,11 @@ namespace ConsoleGame
         public void Start()
         {
             Draw();
-            is_start = true;
+            is_animation_start = true;
 
             while (true)
             {
-                if (!is_start)
+                if (!is_animation_start)
                 {
                     Clear();
                     break;
@@ -63,36 +64,36 @@ namespace ConsoleGame
         {
             ConsoleKey key = Console.ReadKey(true).Key;
 
+            Bindings.Exec(key, this);
 
-
-            KeyBindings.Exec(key);
-
-            switch (Console.ReadKey(true).Key)
-            {
-//                case ConsoleKey.UpArrow:
-//                    if(CursorCurrentPosition.Y < Console.WindowHeight - 1)
-//                        CursorCurrentPosition.Y++;
+//            switch (Console.ReadKey(true).Key)
+//            {
+////                case ConsoleKey.UpArrow:
+////                    if(CursorCurrentPosition.Y < Console.WindowHeight - 1)
+////                        CursorCurrentPosition.Y++;
+////                    break;
+////                case ConsoleKey.DownArrow:
+////                    if(CursorCurrentPosition.Y > 0)
+////                        CursorCurrentPosition.Y--;
+////                    break;
+////                case ConsoleKey.RightArrow:
+////                    if(CursorCurrentPosition.X < Console.WindowWidth - 1)
+////                        CursorCurrentPosition.X++;
+////                    break;
+////                case ConsoleKey.LeftArrow:
+////                    if(CursorCurrentPosition.X > 0)
+////                        CursorCurrentPosition.X--;
+////                    break;
+//                case ConsoleKey.Q:
+//                    is_animation_start = false;
 //                    break;
-//                case ConsoleKey.DownArrow:
-//                    if(CursorCurrentPosition.Y > 0)
-//                        CursorCurrentPosition.Y--;
+//                default:
 //                    break;
-//                case ConsoleKey.RightArrow:
-//                    if(CursorCurrentPosition.X < Console.WindowWidth - 1)
-//                        CursorCurrentPosition.X++;
-//                    break;
-//                case ConsoleKey.LeftArrow:
-//                    if(CursorCurrentPosition.X > 0)
-//                        CursorCurrentPosition.X--;
-//                    break;
-                case ConsoleKey.Q:
-                    is_start = false;
-                    break;
-                default:
-                    break;
-            }
+//            }
             Draw();
         }
+
+        public void Stop() => is_animation_start = false;
 
         /// <summary>
         /// Перерисовка
