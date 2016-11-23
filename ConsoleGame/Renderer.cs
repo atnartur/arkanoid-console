@@ -2,14 +2,41 @@
 
 namespace ConsoleGame
 {
+    /// <summary>
+    /// Консольный ренделрер
+    /// </summary>
     public class Renderer
     {
+        /// <summary>
+        /// Текущая позиция курсора
+        /// </summary>
         readonly Vector2D CursorCurrentPosition = new Vector2D();
+
+        /// <summary>
+        /// Ширина экрана
+        /// </summary>
         public int Width { get; private set; }
+
+        /// <summary>
+        /// Высота экрана
+        /// </summary>
         public int Height { get; private set; }
+
+        /// <summary>
+        /// Флаг продолжения анимации. true - анимация продолжается, false - останавливается
+        /// </summary>
         private bool is_animation_start = false;
+
+        /// <summary>
+        /// Массив точек для вывода
+        /// </summary>
         public Dot[,] world;
+
+        /// <summary>
+        /// Объект для привязки обработчиков нажатий клавиш
+        /// </summary>
         public KeyBindings Bindings = new KeyBindings();
+
 
         public Renderer()
         {
@@ -64,33 +91,7 @@ namespace ConsoleGame
         public void Update()
         {
             ConsoleKey key = Console.ReadKey(true).Key;
-
             Bindings.Exec(key, this);
-
-//            switch (Console.ReadKey(true).Key)
-//            {
-////                case ConsoleKey.UpArrow:
-////                    if(CursorCurrentPosition.Y < Console.WindowHeight - 1)
-////                        CursorCurrentPosition.Y++;
-////                    break;
-////                case ConsoleKey.DownArrow:
-////                    if(CursorCurrentPosition.Y > 0)
-////                        CursorCurrentPosition.Y--;
-////                    break;
-////                case ConsoleKey.RightArrow:
-////                    if(CursorCurrentPosition.X < Console.WindowWidth - 1)
-////                        CursorCurrentPosition.X++;
-////                    break;
-////                case ConsoleKey.LeftArrow:
-////                    if(CursorCurrentPosition.X > 0)
-////                        CursorCurrentPosition.X--;
-////                    break;
-//                case ConsoleKey.Q:
-//                    is_animation_start = false;
-//                    break;
-//                default:
-//                    break;
-//            }
             Draw();
         }
 
@@ -102,23 +103,10 @@ namespace ConsoleGame
         public void Draw()
         {
             Console.SetCursorPosition(0, 0);
-//            Console.Clear();
-//            UpdateCursorPosition();
-            DrawCursorAsSymbol();
-        }
-
-        /// <summary>
-        /// Перерисовка символа
-        /// </summary>
-        public void DrawCursorAsSymbol()
-        {
 
             for(int i = 0; i < world.GetLength(0); i++)
-            {
-                for (int j = 0; j < world.GetLength(1); j++){
+                for (int j = 0; j < world.GetLength(1); j++)
                     Console.Write(world[i, j]);
-                }
-            }
         }
 
         /// <summary>
