@@ -5,27 +5,28 @@ namespace ConsoleGame
     public class Renderer
     {
         readonly Vector2D CursorCurrentPosition = new Vector2D();
-        private int width;
-        private int height;
+        public int Width { get; private set; }
+        public int Height { get; private set; }
         private bool is_animation_start = false;
-        private Dot[,] world;
+        public Dot[,] world;
         public KeyBindings Bindings = new KeyBindings();
 
         public Renderer()
         {
-            width = Console.WindowWidth;
-            height = Console.WindowHeight-2;
+            Width = Console.WindowWidth;
+            Height = Console.WindowHeight-2;
 
-//            CursorCurrentPosition.Set(width / 2, height / 2);
+//            CursorCurrentPosition.Set(Width / 2, Height / 2);
             SetBackgroundColor(ConsoleColor.DarkBlue);
 
-            world = new Dot[height, width];
+            world = new Dot[Height, Width];
 
             for(int i = 0; i < world.GetLength(0); i++)
                 for (int j = 0; j < world.GetLength(1); j++)
                     world[i, j] = new Dot();
 
             KeyHandlers.Attach(Bindings);
+            new Board(this);
             Draw();
             Update();
         }
