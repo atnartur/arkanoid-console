@@ -53,7 +53,10 @@ namespace ConsoleGame
                     world[i, j] = new Dot();
 
             KeyHandlers.Attach(Bindings);
+
+            // @TODO: подумать насчет хранения объектов. Dependency Injection?
             new Board(this);
+
             Draw();
             Update();
         }

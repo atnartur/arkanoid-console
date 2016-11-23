@@ -22,9 +22,6 @@ namespace ConsoleGame
             Symbol = symbol;
         }
 
-        public override String ToString()
-        {
-            return Symbol.ToString();
-        }
+        public override String ToString() => Symbol.ToString();
     }
 }

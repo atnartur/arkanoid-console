@@ -1,4 +1,6 @@
-﻿namespace ConsoleGame
+﻿using System;
+
+namespace ConsoleGame
 {
     /// <summary>
     /// Двухмерный вектор
@@ -46,5 +48,24 @@
             X = x;
             Y = y;
         }
+
+
+        public override String ToString() => "(" + X + "; " + Y + ")";
+
+        /// <summary>
+        /// Сложение векторов
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static Vector2D Sum(Vector2D a, Vector2D b)
+        {
+            Vector2D res = a;
+            res.X += b.X;
+            res.Y += b.Y;
+            return res;
+        }
+
+        public static Vector2D operator +(Vector2D a, Vector2D b) => Sum(a, b);
     }
 }
