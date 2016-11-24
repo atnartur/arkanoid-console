@@ -28,6 +28,11 @@ namespace ConsoleGame
         private Renderer renderer;
 
         /// <summary>
+        /// Максимальная высота подъема доски
+        /// </summary>
+        private int max_height = 5;
+
+        /// <summary>
         /// Инициализация доски
         /// </summary>
         /// <param name="renderer"></param>
@@ -47,7 +52,8 @@ namespace ConsoleGame
 
         private void fill()
         {
-            Console.WriteLine(center);
+            if(renderer.debug)
+                Console.WriteLine(center);
 
             int right = center.X + size;
             int left = center.X - size;
@@ -83,7 +89,10 @@ namespace ConsoleGame
         private bool Up(Renderer renderer)
         {
             clean();
-            center += new Vector2D(0, -1);
+
+            if(center.Y > renderer.Height - max_height)
+                center += new Vector2D(0, -1);
+
             render();
             return true;
         }
@@ -113,7 +122,9 @@ namespace ConsoleGame
         private bool Left(Renderer renderer)
         {
             clean();
-            center += new Vector2D(-1, 0);
+            if(center.X > size + 1)
+                center += new Vector2D(-1, 0);
+
             render();
             return true;
         }
@@ -127,7 +138,8 @@ namespace ConsoleGame
         private bool Right(Renderer renderer)
         {
             clean();
-            center += new Vector2D(1, 0);
+            if(center.X < renderer.Width - 2 - size)
+                center += new Vector2D(1, 0);
             render();
             return true;
         }

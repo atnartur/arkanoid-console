@@ -37,11 +37,14 @@ namespace ConsoleGame
         /// </summary>
         public KeyBindings Bindings = new KeyBindings();
 
-        private bool debug = false;
+        /// <summary>
+        /// Флаг отладки
+        /// </summary>
+        public bool debug = false;
 
         public Renderer()
         {
-            debug = true;
+//            debug = true;
 
             Width = Console.WindowWidth;
             Height = Console.WindowHeight;
@@ -49,7 +52,6 @@ namespace ConsoleGame
             if (debug)
                 Height -= 2;
 
-//            CursorCurrentPosition.Set(Width / 2, Height / 2);
             SetBackgroundColor(ConsoleColor.DarkBlue);
 
             world = new Dot[Height, Width];
