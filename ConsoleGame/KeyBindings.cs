@@ -14,7 +14,7 @@ namespace ConsoleGame
         /// Словарь: ключ - ConsoleKey (клавиша), которая была нажата;
         /// значение - функция, принимающая объект типа Renderer и возвращающаяя булево значение, вызовется при нажатии клавиши
         /// </summary>
-        private readonly Dictionary<ConsoleKey, Func<Renderer, bool>> _bindings = new Dictionary<ConsoleKey, Func<Renderer, bool>>();
+        private readonly Dictionary<ConsoleKey, Action<Renderer>> _bindings = new Dictionary<ConsoleKey, Action<Renderer>>();
 
         /// <summary>
         /// Метод вызова функции при нажатии клавиши
