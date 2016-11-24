@@ -37,11 +37,17 @@ namespace ConsoleGame
         /// </summary>
         public KeyBindings Bindings = new KeyBindings();
 
+        private bool debug = false;
 
         public Renderer()
         {
+            debug = true;
+
             Width = Console.WindowWidth;
-            Height = Console.WindowHeight-2;
+            Height = Console.WindowHeight;
+
+            if (debug)
+                Height -= 2;
 
 //            CursorCurrentPosition.Set(Width / 2, Height / 2);
             SetBackgroundColor(ConsoleColor.DarkBlue);
@@ -107,8 +113,8 @@ namespace ConsoleGame
         {
             Console.SetCursorPosition(0, 0);
 
-            for(int i = 0; i < world.GetLength(0); i++)
-                for (int j = 0; j < world.GetLength(1); j++)
+            for(int i = 0; i < Height; i++)
+                for (int j = 0; j < Width; j++)
                     Console.Write(world[i, j]);
         }
 

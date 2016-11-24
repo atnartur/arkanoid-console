@@ -47,11 +47,13 @@ namespace ConsoleGame
 
         private void fill()
         {
-            int x_center = center.X;
-            int y_center = center.Y;
             Console.WriteLine(center);
-            for(int i = x_center - size; i < x_center + size; i ++)
-                renderer.world[y_center, i] = new Dot(symbol);
+
+            int right = center.X + size;
+            int left = center.X - size;
+
+            for(int i = left; i < right && right < renderer.Width - 1 && left > 0; i ++)
+                renderer.world[center.Y, i] = new Dot(symbol);
         }
 
         /// <summary>
@@ -81,7 +83,7 @@ namespace ConsoleGame
         private bool Up(Renderer renderer)
         {
             clean();
-            center += new Vector2D(0, 1);
+            center += new Vector2D(0, -1);
             render();
             return true;
         }
@@ -95,7 +97,8 @@ namespace ConsoleGame
         private bool Down(Renderer renderer)
         {
             clean();
-            center += new Vector2D(0, -1);
+            if(center.Y < renderer.Height - 1)
+                center += new Vector2D(0, 1);
             render();
             return true;
 

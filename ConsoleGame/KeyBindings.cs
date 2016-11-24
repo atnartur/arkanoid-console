@@ -25,14 +25,13 @@ namespace ConsoleGame
         public bool Exec(ConsoleKey key, Renderer renderer)
         {
             Func<Renderer, bool> callback;
-            Console.WriteLine(key);
 
             _bindings.TryGetValue(key, out callback);
 
             try{
                 callback.Invoke(renderer);
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
                 return false;
             }
