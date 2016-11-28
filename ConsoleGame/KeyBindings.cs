@@ -24,7 +24,7 @@ namespace ConsoleGame
         /// <returns>true, если обработчик был вызван, и false, если обработчик не был вызван</returns>
         public bool Exec(ConsoleKey key, Renderer renderer)
         {
-            Func<Renderer, bool> callback;
+            Action<Renderer> callback;
 
             _bindings.TryGetValue(key, out callback);
 
@@ -43,7 +43,7 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="key">Клавиша</param>
         /// <param name="callback">Функция, которая вызовется при нажатии на эту клавишу</param>
-        public void Add(ConsoleKey key, Func<Renderer, bool> callback) => _bindings.Add(key, callback);
+        public void Add(ConsoleKey key, Action<Renderer> callback) => _bindings.Add(key, callback);
 
 
         /// <summary>

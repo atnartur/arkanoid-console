@@ -46,7 +46,7 @@ namespace ConsoleGame
             renderer.Bindings.Add(ConsoleKey.LeftArrow, Left);
             renderer.Bindings.Add(ConsoleKey.RightArrow, Right);
 
-            render();
+            Render();
         }
 
 
@@ -65,7 +65,7 @@ namespace ConsoleGame
         /// <summary>
         /// Отрисовка доски
         /// </summary>
-        private void render()
+        private void Render()
         {
             symbol = '=';
             fill();
@@ -75,7 +75,7 @@ namespace ConsoleGame
         /// <summary>
         /// Очистка отрисованной доски
         /// </summary>
-        private void clean()
+        private void Clean()
         {
             symbol = ' ';
             fill();
@@ -86,15 +86,14 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="renderer"></param>
         /// <returns></returns>
-        private bool Up(Renderer renderer)
+        private void Up(Renderer renderer)
         {
-            clean();
+            Clean();
 
             if(center.Y > renderer.Height - max_height)
                 center += new Vector2D(0, -1);
 
-            render();
-            return true;
+            Render();
         }
 
 
@@ -103,13 +102,12 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="renderer"></param>
         /// <returns></returns>
-        private bool Down(Renderer renderer)
+        private void Down(Renderer renderer)
         {
-            clean();
+            Clean();
             if(center.Y < renderer.Height - 1)
                 center += new Vector2D(0, 1);
-            render();
-            return true;
+            Render();
 
         }
 
@@ -119,14 +117,13 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="renderer"></param>
         /// <returns></returns>
-        private bool Left(Renderer renderer)
+        private void Left(Renderer renderer)
         {
-            clean();
+            Clean();
             if(center.X > size + 1)
                 center += new Vector2D(-1, 0);
 
-            render();
-            return true;
+            Render();
         }
 
 
@@ -135,13 +132,12 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="renderer"></param>
         /// <returns></returns>
-        private bool Right(Renderer renderer)
+        private void Right(Renderer renderer)
         {
-            clean();
+            Clean();
             if(center.X < renderer.Width - 2 - size)
                 center += new Vector2D(1, 0);
-            render();
-            return true;
+            Render();
         }
     }
 }
