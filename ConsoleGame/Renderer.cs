@@ -1,12 +1,26 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace ConsoleGame
 {
     /// <summary>
     /// Консольный ренделрер
     /// </summary>
-    public class Renderer
+    public sealed class Renderer
     {
+        private static Renderer _instance;
+
+        public static Renderer Instance
+        {
+            get
+            {
+                Console.WriteLine(_instance);
+                if (_instance == null)
+                    _instance = new Renderer();
+                return _instance;
+            }
+        }
+
         /// <summary>
         /// Текущая позиция курсора
         /// </summary>
@@ -42,9 +56,15 @@ namespace ConsoleGame
         /// </summary>
         public bool debug = false;
 
-        public Renderer()
+        public override String ToString()
         {
-//            debug = true;
+            return DateTime.Now.ToString();
+        }
+        private Renderer()
+        {
+//            Console.WriteLine(DateTime.Now);
+
+            debug = true;
 
             Width = Console.WindowWidth;
             Height = Console.WindowHeight;
@@ -62,11 +82,13 @@ namespace ConsoleGame
 
             KeyHandlers.Attach(Bindings);
 
-            // @TODO: подумать насчет хранения объектов. Dependency Injection?
-            new Board(this);
 
-            Draw();
-            Update();
+
+            // @TODO: подумать насчет хранения объектов. Dependency Injection?
+//            new Board();
+
+//            Draw();
+//            Update();
         }
 
 
@@ -81,7 +103,6 @@ namespace ConsoleGame
         /// </summary>
         public void Start()
         {
-            Draw();
             is_animation_start = true;
 
             while (true)
@@ -91,7 +112,6 @@ namespace ConsoleGame
                     Clear();
                     break;
                 }
-
                 Update();
             }
         }
@@ -102,8 +122,8 @@ namespace ConsoleGame
         public void Update()
         {
             ConsoleKey key = Console.ReadKey(true).Key;
-            Bindings.Exec(key, this);
-            Draw();
+            Bindings.Exec(key);
+//            Draw();
         }
 
         public void Stop() => is_animation_start = false;
@@ -111,13 +131,11 @@ namespace ConsoleGame
         /// <summary>
         /// Перерисовка
         /// </summary>
-        public void Draw()
+        public void DrawCanvas()
         {
-            Console.SetCursorPosition(0, 0);
-
             for(int i = 0; i < Height; i++)
                 for (int j = 0; j < Width; j++)
-                    Console.Write(world[i, j]);
+                    Console.Write(' ');
         }
 
         /// <summary>
@@ -134,5 +152,11 @@ namespace ConsoleGame
         /// Обновление позиции курсора
         /// </summary>
         public void UpdateCursorPosition() => Console.SetCursorPosition(CursorCurrentPosition.X, Console.WindowHeight - CursorCurrentPosition.Y);
+
+
+        public void FillRect(Vector2D a, Vector2D b)
+        {
+
+        }
     }
 }

@@ -46,9 +46,10 @@ namespace ConsoleGame
         }
         public static void Main(string[] args)
         {
-            Renderer renderer = new Renderer();
-            renderer.Draw();
-            renderer.Start();
+            Renderer renderer = Renderer.Instance;
+            new Board();
+//            renderer.Draw();
+//            renderer.Start();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="renderer"></param>
         /// <returns></returns>
-        private static void Quit(Renderer renderer) => renderer.Stop();
+        private static void Quit() => Renderer.Instance.Stop();
 
         /// <summary>
         /// Инициализация привязки обработчиков

@@ -23,11 +23,6 @@ namespace ConsoleGame
         private Vector2D center;
 
         /// <summary>
-        /// Renderer
-        /// </summary>
-        private Renderer renderer;
-
-        /// <summary>
         /// Максимальная высота подъема доски
         /// </summary>
         private int max_height = 5;
@@ -36,11 +31,11 @@ namespace ConsoleGame
         /// Инициализация доски
         /// </summary>
         /// <param name="renderer"></param>
-        public Board(Renderer renderer)
+        public Board()
         {
+            Renderer renderer = Renderer.Instance;
             center = new Vector2D(renderer.Width / 2, renderer.world.GetLength(0) - 1);
 
-            this.renderer = renderer;
             renderer.Bindings.Add(ConsoleKey.UpArrow, Up);
             renderer.Bindings.Add(ConsoleKey.DownArrow, Down);
             renderer.Bindings.Add(ConsoleKey.LeftArrow, Left);
@@ -50,8 +45,10 @@ namespace ConsoleGame
         }
 
 
-        private void fill()
+        private void Fill()
         {
+            Renderer renderer = Renderer.Instance;
+
             if(renderer.debug)
                 Console.WriteLine(center);
 
@@ -68,7 +65,7 @@ namespace ConsoleGame
         private void Render()
         {
             symbol = '=';
-            fill();
+            Fill();
         }
 
 
@@ -78,7 +75,7 @@ namespace ConsoleGame
         private void Clean()
         {
             symbol = ' ';
-            fill();
+            Fill();
         }
 
         /// <summary>
@@ -86,8 +83,10 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="renderer"></param>
         /// <returns></returns>
-        private void Up(Renderer renderer)
+        private void Up()
         {
+            Renderer renderer = Renderer.Instance;
+
             Clean();
 
             if(center.Y > renderer.Height - max_height)
@@ -102,8 +101,10 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="renderer"></param>
         /// <returns></returns>
-        private void Down(Renderer renderer)
+        private void Down()
         {
+            Renderer renderer = Renderer.Instance;
+
             Clean();
             if(center.Y < renderer.Height - 1)
                 center += new Vector2D(0, 1);
@@ -117,8 +118,9 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="renderer"></param>
         /// <returns></returns>
-        private void Left(Renderer renderer)
+        private void Left()
         {
+
             Clean();
             if(center.X > size + 1)
                 center += new Vector2D(-1, 0);
@@ -132,8 +134,10 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="renderer"></param>
         /// <returns></returns>
-        private void Right(Renderer renderer)
+        private void Right()
         {
+            Renderer renderer = Renderer.Instance;
+
             Clean();
             if(center.X < renderer.Width - 2 - size)
                 center += new Vector2D(1, 0);
