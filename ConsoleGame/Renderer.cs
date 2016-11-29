@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel;
+using System.Collections.Generic;
+
 
 namespace ConsoleGame
 {
@@ -14,7 +17,6 @@ namespace ConsoleGame
         {
             get
             {
-                Console.WriteLine(_instance);
                 if (_instance == null)
                     _instance = new Renderer();
                 return _instance;
@@ -24,7 +26,7 @@ namespace ConsoleGame
         /// <summary>
         /// Текущая позиция курсора
         /// </summary>
-        readonly Vector2D CursorCurrentPosition = new Vector2D();
+//        readonly Vector2D CursorCurrentPosition = new Vector2D();
 
         /// <summary>
         /// Ширина экрана
@@ -42,29 +44,22 @@ namespace ConsoleGame
         private bool is_animation_start = false;
 
         /// <summary>
-        /// Массив точек для вывода
-        /// </summary>
-        public Dot[,] world;
-
-        /// <summary>
         /// Объект для привязки обработчиков нажатий клавиш
         /// </summary>
         public KeyBindings Bindings = new KeyBindings();
+
+        public List<IObject> Scene = new List<IObject>();
 
         /// <summary>
         /// Флаг отладки
         /// </summary>
         public bool debug = false;
 
-        public override String ToString()
-        {
-            return DateTime.Now.ToString();
-        }
         private Renderer()
         {
 //            Console.WriteLine(DateTime.Now);
 
-            debug = true;
+//            debug = true;
 
             Width = Console.WindowWidth;
             Height = Console.WindowHeight;
@@ -73,19 +68,11 @@ namespace ConsoleGame
                 Height -= 2;
 
             SetBackgroundColor(ConsoleColor.DarkBlue);
-
-            world = new Dot[Height, Width];
-
-            for(int i = 0; i < world.GetLength(0); i++)
-                for (int j = 0; j < world.GetLength(1); j++)
-                    world[i, j] = new Dot();
+//            Console.ForegroundColor = ConsoleColor.Green;
 
             KeyHandlers.Attach(Bindings);
-
-
-
+            Console.CursorVisible = false;
             // @TODO: подумать насчет хранения объектов. Dependency Injection?
-//            new Board();
 
 //            Draw();
 //            Update();
@@ -104,7 +91,6 @@ namespace ConsoleGame
         public void Start()
         {
             is_animation_start = true;
-
             while (true)
             {
                 if (!is_animation_start)
@@ -112,6 +98,7 @@ namespace ConsoleGame
                     Clear();
                     break;
                 }
+
                 Update();
             }
         }
@@ -121,9 +108,12 @@ namespace ConsoleGame
         /// </summary>
         public void Update()
         {
+            for (int i = 0; i < Scene.Count; i++)
+            {
+                    ((IObject) Scene[i]).Render();
+            }
             ConsoleKey key = Console.ReadKey(true).Key;
             Bindings.Exec(key);
-//            Draw();
         }
 
         public void Stop() => is_animation_start = false;
@@ -151,11 +141,27 @@ namespace ConsoleGame
         /// <summary>
         /// Обновление позиции курсора
         /// </summary>
-        public void UpdateCursorPosition() => Console.SetCursorPosition(CursorCurrentPosition.X, Console.WindowHeight - CursorCurrentPosition.Y);
+//        public void UpdateCursorPosition() => Console.SetCursorPosition(CursorCurrentPosition.X, Console.WindowHeight - CursorCurrentPosition.Y);
 
 
-        public void FillRect(Vector2D a, Vector2D b)
+        public void FillRect(char symbol, Vector2D a, Vector2D b = null)
         {
+            if (b == null || a.Equals(b))
+            {
+                Console.SetCursorPosition(a.X, a.Y);
+                Console.Write(symbol);
+            }
+            else
+            {
+                for (int y = a.Y; y <= b.Y; y++)
+                {
+                    for (int x = a.X; x <= b.X; x++)
+                    {
+                        Console.SetCursorPosition(x, y);
+                        Console.Write(symbol);
+                    }
+                }
+            }
 
         }
     }

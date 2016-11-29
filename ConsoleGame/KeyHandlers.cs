@@ -21,6 +21,7 @@ namespace ConsoleGame
         public static void Attach(KeyBindings bindings)
         {
             bindings.Add(ConsoleKey.Q, Quit);
+            bindings.Add(ConsoleKey.Escape, Quit);
         }
     }
 }
