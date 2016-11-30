@@ -60,7 +60,7 @@ namespace ConsoleGame
         /// <returns></returns>
         public static Vector2D Sum(Vector2D a, Vector2D b)
         {
-            Vector2D res = a;
+            Vector2D res = new Vector2D(a.X, a.Y);
             res.X += b.X;
             res.Y += b.Y;
             return res;

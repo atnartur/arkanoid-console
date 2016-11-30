@@ -51,10 +51,8 @@ namespace ConsoleGame
             if(renderer.debug)
                 Console.WriteLine(center);
 
-            Vector2D a = center + new Vector2D(size, 0);
+            Vector2D a = center + new Vector2D(-size, 0);
             Vector2D b = center + new Vector2D(size, 0);
-            Console.WriteLine(a);
-            Console.WriteLine(b);
 //
 //            int right = center.X + size;
 //            int left = center.X - size;

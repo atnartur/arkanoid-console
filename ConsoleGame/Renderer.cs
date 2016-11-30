@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.ComponentModel;
 using System.Collections.Generic;
-
 
 namespace ConsoleGame
 {
@@ -110,7 +107,7 @@ namespace ConsoleGame
         {
             for (int i = 0; i < Scene.Count; i++)
             {
-                    ((IObject) Scene[i]).Render();
+                ((IObject) Scene[i]).Render();
             }
             ConsoleKey key = Console.ReadKey(true).Key;
             Bindings.Exec(key);
