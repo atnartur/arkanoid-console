@@ -20,7 +20,7 @@ namespace ConsoleGame
         /// <summary>
         /// Центральная точка вывода доски
         /// </summary>
-        private Vector2D center;
+        public Vector2D Center { get; private set; }
 
         /// <summary>
         /// Максимальная высота подъема доски
@@ -34,7 +34,7 @@ namespace ConsoleGame
         public Board()
         {
             Renderer renderer = Renderer.Instance;
-            center = new Vector2D(renderer.Width / 2, renderer.Height - 1);
+            Center = new Vector2D(renderer.Width / 2, renderer.Height - 1);
             renderer.Bindings.Add(ConsoleKey.UpArrow, Up);
             renderer.Bindings.Add(ConsoleKey.DownArrow, Down);
             renderer.Bindings.Add(ConsoleKey.LeftArrow, Left);
@@ -49,10 +49,10 @@ namespace ConsoleGame
             Renderer renderer = Renderer.Instance;
 
             if(renderer.debug)
-                Console.WriteLine(center);
+                Console.WriteLine(Center);
 
-            Vector2D a = center + new Vector2D(-size, 0);
-            Vector2D b = center + new Vector2D(size, 0);
+            Vector2D a = Center + new Vector2D(-size, 0);
+            Vector2D b = Center + new Vector2D(size, 0);
 
             renderer.FillRect(symbol, a, b);
         }
@@ -69,8 +69,8 @@ namespace ConsoleGame
             Render();
             Renderer renderer = Renderer.Instance;
 
-            if(center.Y > renderer.Height - max_height)
-                center += new Vector2D(0, -1);
+            if(Center.Y > renderer.Height - max_height)
+                Center += new Vector2D(0, -1);
             symbol = '=';
 
             Render();
@@ -88,8 +88,8 @@ namespace ConsoleGame
             Render();
             Renderer renderer = Renderer.Instance;
 
-            if(center.Y < renderer.Height - 1)
-                center += new Vector2D(0, 1);
+            if(Center.Y < renderer.Height - 1)
+                Center += new Vector2D(0, 1);
             symbol = '=';
             Render();
         }
@@ -105,8 +105,8 @@ namespace ConsoleGame
             symbol = ' ';
             Render();
 
-            if(center.X > size + 1)
-                center += new Vector2D(-1, 0);
+            if(Center.X > size + 1)
+                Center += new Vector2D(-1, 0);
             symbol = '=';
 
             Render();
@@ -126,8 +126,8 @@ namespace ConsoleGame
 
             Renderer renderer = Renderer.Instance;
 
-            if(center.X < renderer.Width - 2 - size)
-                center += new Vector2D(1, 0);
+            if(Center.X < renderer.Width - 2 - size)
+                Center += new Vector2D(1, 0);
             symbol = '=';
 
             Render();

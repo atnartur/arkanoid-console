@@ -49,7 +49,10 @@ namespace ConsoleGame
             Console.Clear();
             Renderer renderer = Renderer.Instance;
             renderer.DrawCanvas();
-            renderer.Scene.Add(new Board());
+            Board board = new Board();
+            Ball ball = new Ball(board);
+            renderer.Scene.Add(ball);
+            renderer.Scene.Add(board);
 
 
             renderer.Start();
