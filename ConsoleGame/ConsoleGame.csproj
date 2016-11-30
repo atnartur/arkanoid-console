@@ -52,7 +52,6 @@
     <Compile Include="Vector2D.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="README.md" />
     <Content Include="run.sh" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

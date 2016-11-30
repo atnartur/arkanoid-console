@@ -133,14 +133,15 @@ namespace ConsoleGame
             Console.ResetColor();
             Console.Clear();
             Console.SetCursorPosition(0, 0);
+            Console.CursorVisible = true;
         }
 
         /// <summary>
-        /// Обновление позиции курсора
+        /// Заполняет прямоугольную область символом
         /// </summary>
-//        public void UpdateCursorPosition() => Console.SetCursorPosition(CursorCurrentPosition.X, Console.WindowHeight - CursorCurrentPosition.Y);
-
-
+        /// <param name="symbol">символ</param>
+        /// <param name="a">левый верхний угол</param>
+        /// <param name="b">правый нижний угол</param>
         public void FillRect(char symbol, Vector2D a, Vector2D b = null)
         {
             if (b == null || a.Equals(b))

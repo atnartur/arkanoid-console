@@ -53,12 +53,8 @@ namespace ConsoleGame
 
             Vector2D a = center + new Vector2D(-size, 0);
             Vector2D b = center + new Vector2D(size, 0);
-//
-//            int right = center.X + size;
-//            int left = center.X - size;
+
             renderer.FillRect(symbol, a, b);
-//            for(int i = left; i < right && right < renderer.Width - 1 && left > 0; i ++)
-//                renderer.world[center.Y, i] = new Dot(symbol);
         }
 
         /// <summary>

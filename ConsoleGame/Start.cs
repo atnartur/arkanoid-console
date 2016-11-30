@@ -50,6 +50,8 @@ namespace ConsoleGame
             Renderer renderer = Renderer.Instance;
             renderer.DrawCanvas();
             renderer.Scene.Add(new Board());
+
+
             renderer.Start();
         }
     }
