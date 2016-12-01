@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Ball.cs" />
     <Compile Include="Board.cs" />
-    <Compile Include="Dot.cs" />
     <Compile Include="Help.cs" />
     <Compile Include="IObject.cs" />
     <Compile Include="KeyBindings.cs" />
