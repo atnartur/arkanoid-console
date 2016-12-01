@@ -74,15 +74,21 @@ namespace ConsoleGame
                 case State.Moving:
                     if (_movingStep > 1000)
                     {
+                        // ограничение движений по оси X
                         if(vector_2.X >= Renderer.Instance.Width - 1)
                             _direction = new Vector2D(-1, 1);
                         else if(vector_2.X <= 0)
                             _direction = new Vector2D(1, -1);
 
+                        // ограничение движений по оси Y
                         if(vector_2.Y >= Renderer.Instance.Height - 1)
                             _direction = new Vector2D(-1, -1);
-                        else if(vector_2.Y <= 0)
-                            _direction = new Vector2D(1, 1);
+                        else if (vector_2.Y <= 0)
+                        {
+                            _state = State.Stop;
+                            
+                        }
+
 
                         vector_2 += _direction;
                         _movingStep = 0;
