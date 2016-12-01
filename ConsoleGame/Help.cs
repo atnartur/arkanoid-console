@@ -12,6 +12,9 @@ namespace ConsoleGame
         {
             ReadFile();
             Renderer.Instance.Bindings.Add(ConsoleKey.F1, Show);
+
+            // кнопка со знаком вопроса рядом с правым SHIFT
+            Renderer.Instance.Bindings.Add(ConsoleKey.Divide, Show);
         }
 
         public void Show()
@@ -32,7 +35,7 @@ namespace ConsoleGame
 
             for (int i = 1; i < _content.Length; i++)
             {
-                Thread.Sleep(50);
+                Thread.Sleep(25);
                 renderer.PrintLineWithMargin(_content[i], 3, ConsoleColor.Black);
             }
 
