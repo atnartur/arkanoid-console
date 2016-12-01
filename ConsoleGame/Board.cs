@@ -102,7 +102,7 @@ namespace ConsoleGame
             Render();
 
             if(Center.X > size + 1)
-                Center += new Vector2D(-1, 0);
+                Center += new Vector2D(-3, 0);
             symbol = '=';
 
             Render();
@@ -121,7 +121,7 @@ namespace ConsoleGame
             Renderer renderer = Renderer.Instance;
 
             if(Center.X < renderer.Width - 2 - size)
-                Center += new Vector2D(1, 0);
+                Center += new Vector2D(3, 0);
             symbol = '=';
 
             Render();
