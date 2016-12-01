@@ -43,7 +43,9 @@ namespace ConsoleGame
             Render();
         }
 
-
+        /// <summary>
+        /// Отображение
+        /// </summary>
         public void Render()
         {
             Renderer renderer = Renderer.Instance;
@@ -60,8 +62,6 @@ namespace ConsoleGame
         /// <summary>
         /// Обработчик нажатия на клавишу вверх
         /// </summary>
-        /// <param name="renderer"></param>
-        /// <returns></returns>
         private void Up()
         {
             symbol = ' ';
@@ -80,8 +80,6 @@ namespace ConsoleGame
         /// <summary>
         /// Обработчик нажатия на клавишу вниз
         /// </summary>
-        /// <param name="renderer"></param>
-        /// <returns></returns>
         private void Down()
         {
             symbol = ' ';
@@ -98,8 +96,6 @@ namespace ConsoleGame
         /// <summary>
         /// Обработчик нажатия на клавишу влево
         /// </summary>
-        /// <param name="renderer"></param>
-        /// <returns></returns>
         private void Left()
         {
             symbol = ' ';
@@ -116,8 +112,6 @@ namespace ConsoleGame
         /// <summary>
         /// Обработчик нажатия клавиши вправо
         /// </summary>
-        /// <param name="renderer"></param>
-        /// <returns></returns>
         private void Right()
         {
             symbol = ' ';

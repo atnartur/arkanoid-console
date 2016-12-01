@@ -1,20 +1,40 @@
-﻿using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Xml.Serialization.Configuration;
+﻿using System.Collections.Generic;
 
 namespace ConsoleGame
 {
+    /// <summary>
+    /// Блоки
+    /// </summary>
     public class Blocks : IObject
     {
+        /// <summary>
+        /// Шарик
+        /// </summary>
         private Ball _ball;
+
+        /// <summary>
+        /// Массив точек
+        /// </summary>
         public List<Vector2D> Dots { get; private set; }
+
+        /// <summary>
+        /// Отображенные точки
+        /// </summary>
         private List<Vector2D> _renderedDots;
 
+        /// <summary>
+        /// Инициализация блоков
+        /// </summary>
+        /// <param name="ball">Шарик</param>
         public Blocks(Ball ball)
         {
             _ball = ball;
             Generate();
         }
+
+        /// <summary>
+        /// Отображение
+        /// </summary>
         public void Render()
         {
             if (_renderedDots != Dots)
@@ -25,6 +45,9 @@ namespace ConsoleGame
             }
         }
 
+        /// <summary>
+        /// генерация точек
+        /// </summary>
         public void Generate()
         {
             Dots = new List<Vector2D>();

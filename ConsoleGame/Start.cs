@@ -4,13 +4,20 @@ namespace ConsoleGame
 {
     internal class Start
     {
-
+        /// <summary>
+        /// Запуск игры
+        /// </summary>
         public static void StartGame()
         {
             Renderer renderer = Renderer.Instance;
             renderer.DrawCanvas();
             renderer.Start();
         }
+
+        /// <summary>
+        /// Точка входа
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             Console.Clear();

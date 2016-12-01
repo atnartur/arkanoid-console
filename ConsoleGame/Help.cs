@@ -4,10 +4,19 @@ using System.Threading;
 
 namespace ConsoleGame
 {
+    /// <summary>
+    /// Подсказка
+    /// </summary>
     public class Help
     {
+        /// <summary>
+        /// Содержание подсказки
+        /// </summary>
         private String[] _content;
 
+        /// <summary>
+        /// Инициализация
+        /// </summary>
         public Help()
         {
             ReadFile();
@@ -17,6 +26,9 @@ namespace ConsoleGame
             Renderer.Instance.Bindings.Add(ConsoleKey.Divide, Show);
         }
 
+        /// <summary>
+        /// Отображение подсказки
+        /// </summary>
         public void Show()
         {
             Renderer renderer = Renderer.Instance;
@@ -59,6 +71,9 @@ namespace ConsoleGame
             }
         }
 
+        /// <summary>
+        /// Чтение подсказки из файла
+        /// </summary>
         private void ReadFile()
         {
             using (StreamReader sr = new StreamReader("./help.txt"))

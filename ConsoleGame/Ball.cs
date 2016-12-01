@@ -2,8 +2,14 @@
 
 namespace ConsoleGame
 {
+    /// <summary>
+    /// Шарик
+    /// </summary>
     public class Ball : IObject
     {
+        /// <summary>
+        /// Состояния шарика
+        /// </summary>
         enum State
         {
             StandOnBoard,
@@ -11,13 +17,40 @@ namespace ConsoleGame
             Stop
         }
 
+        /// <summary>
+        /// Текущее состояние
+        /// </summary>
         private State _state = State.StandOnBoard;
+
+        /// <summary>
+        /// Номер кадра для движения
+        /// </summary>
         private int _movingStep = 0;
+
+        /// <summary>
+        /// Символ шарика
+        /// </summary>
         private readonly char _symbol = '@';
+
+        /// <summary>
+        /// Направление движения шарика
+        /// </summary>
         private Vector2D _direction = new Vector2D(1, 1);
+
+        /// <summary>
+        ///
+        /// </summary>
         private readonly Board _board;
+
+        /// <summary>
+        /// Место нахождения шарика
+        /// </summary>
         public Vector2D Center { get; private set; }
 
+        /// <summary>
+        /// Инициализация шарика
+        /// </summary>
+        /// <param name="board">Доска</param>
         public Ball(Board board)
         {
             _board = board;
@@ -25,6 +58,10 @@ namespace ConsoleGame
 
             Renderer.Instance.Bindings.Add(ConsoleKey.Spacebar, StartMoving);
         }
+
+        /// <summary>
+        /// Отображение
+        /// </summary>
         public void Render()
         {
             Vector2D vector_2 = new Vector2D(Center);
@@ -67,9 +104,9 @@ namespace ConsoleGame
 
         }
 
-        private void StartMoving()
-        {
-            _state = State.Moving;
-        }
+        /// <summary>
+        /// Запуск движения
+        /// </summary>
+        private void StartMoving() => _state = State.Moving;
     }
 }

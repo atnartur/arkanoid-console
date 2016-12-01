@@ -17,11 +17,20 @@ namespace ConsoleGame
         /// </summary>
         public int Y { get; set; }
 
+        /// <summary>
+        /// Инициализация по координатам
+        /// </summary>
+        /// <param name="x">x</param>
+        /// <param name="y">y</param>
         public Vector2D(int x = 0, int y = 0)
         {
             Set(x, y);
         }
 
+        /// <summary>
+        /// Клонирование вектора
+        /// </summary>
+        /// <param name="a">другой вектор</param>
         public Vector2D(Vector2D a)
         {
             Set(a.X, a.Y);
@@ -53,7 +62,6 @@ namespace ConsoleGame
             X = x;
             Y = y;
         }
-
 
         public override String ToString() => "(" + X + "; " + Y + ")";
 
