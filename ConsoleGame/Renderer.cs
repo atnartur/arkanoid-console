@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ConsoleGame
 {
@@ -179,7 +178,21 @@ namespace ConsoleGame
                     }
                 }
             }
-
         }
+
+        public void PrintLineWithMargin(String line, int margin)
+        {
+            int margin_left = margin;
+
+            if (margin_left < 0)
+                margin_left = 0;
+
+            for(int i = 0; i < margin_left; i++)
+                Console.Write(' ');
+
+            Console.Write(line);
+            Console.WriteLine();
+        }
+        public void PrintLineOnCenter(String line) => PrintLineWithMargin(line, (this.Width - line.Length) / 2);
     }
 }
