@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace ConsoleGame
 {
@@ -187,10 +188,46 @@ namespace ConsoleGame
             if (margin_left < 0)
                 margin_left = 0;
 
-            for(int i = 0; i < margin_left; i++)
-                Console.Write(' ');
 
-            Console.Write(line);
+
+            if (line.Length > Width - margin_left * 2)
+            {
+                List<String> words = new List<string>(line.Split(' '));
+
+                StringBuilder str = new StringBuilder();
+                int str_length = 0;
+
+                while (words.Count > 0)
+                {
+                    while (str_length < Width - margin_left * 2 && words.Count > 0)
+                    {
+                        String word = words[0];
+
+                        if (word.Length > Width - margin_left * 2 - str_length)
+                            break;
+
+                        words.RemoveAt(0);
+                        str_length += word.Length + 1;
+                        str.Append(word + ' ');
+                    }
+
+                    for(int i = 0; i < margin_left; i++)
+                        Console.Write(' ');
+
+                    Console.Write(str);
+                    Console.WriteLine();
+                    str.Clear();
+                    str_length = 0;
+                }
+
+            }
+            else
+            {
+                for(int i = 0; i < margin_left; i++)
+                    Console.Write(' ');
+
+                Console.Write(line);
+            }
             Console.WriteLine();
         }
         public void PrintLineOnCenter(String line) => PrintLineWithMargin(line, (this.Width - line.Length) / 2);

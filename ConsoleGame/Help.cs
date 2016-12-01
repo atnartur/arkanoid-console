@@ -33,7 +33,7 @@ namespace ConsoleGame
             for (int i = 1; i < _content.Length; i++)
             {
                 Thread.Sleep(100);
-                renderer.PrintLineWithMargin(_content[i], 10);
+                renderer.PrintLineWithMargin(_content[i], 3);
             }
 
             while (Console.ReadKey(true).Key != ConsoleKey.Spacebar){}
