@@ -165,7 +165,7 @@ namespace ConsoleGame
         {
             if (b == null || a.Equals(b))
             {
-                Console.SetCursorPosition(a.X, a.Y);
+                Console.SetCursorPosition(a.X, this.Height - 1 - a.Y);
                 Console.Write(symbol);
             }
             else
@@ -174,7 +174,7 @@ namespace ConsoleGame
                 {
                     for (int x = a.X; x <= b.X; x++)
                     {
-                        Console.SetCursorPosition(x, y);
+                        Console.SetCursorPosition(x, this.Height - 1 - y);
                         Console.Write(symbol);
                     }
                 }

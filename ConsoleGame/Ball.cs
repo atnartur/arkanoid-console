@@ -7,7 +7,8 @@ namespace ConsoleGame
         enum State
         {
             StandOnBoard,
-            Moving
+            Moving,
+            Stop
         }
 
         private State _state = State.StandOnBoard;
@@ -31,11 +32,21 @@ namespace ConsoleGame
             switch (_state)
             {
                 case State.StandOnBoard:
-                    vector_2 = _board.Center + new Vector2D(0, -1);
+                    vector_2 = _board.Center + new Vector2D(0, 1);
                     break;
                 case State.Moving:
-                    if (_movingStep > 2)
+                    if (_movingStep > 1000)
                     {
+                        if(vector_2.X >= Renderer.Instance.Width - 1)
+                            _direction = new Vector2D(-1, 1);
+                        else if(vector_2.X <= 0)
+                            _direction = new Vector2D(1, -1);
+
+                        if(vector_2.Y >= Renderer.Instance.Height - 1)
+                            _direction = new Vector2D(-1, -1);
+                        else if(vector_2.Y <= 0)
+                            _direction = new Vector2D(1, 1);
+
                         vector_2 += _direction;
                         _movingStep = 0;
                     }
