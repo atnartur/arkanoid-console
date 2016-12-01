@@ -22,6 +22,11 @@ namespace ConsoleGame
             Set(x, y);
         }
 
+        public Vector2D(Vector2D a)
+        {
+            Set(a.X, a.Y);
+        }
+
         /// <summary>
         /// Проверка равенства векторов
         /// </summary>
@@ -60,7 +65,7 @@ namespace ConsoleGame
         /// <returns></returns>
         public static Vector2D Sum(Vector2D a, Vector2D b)
         {
-            Vector2D res = new Vector2D(a.X, a.Y);
+            Vector2D res = new Vector2D(a);
             res.X += b.X;
             res.Y += b.Y;
             return res;

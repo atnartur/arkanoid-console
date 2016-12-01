@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ConsoleGame
 {
@@ -88,6 +89,18 @@ namespace ConsoleGame
         public void Start()
         {
             is_animation_start = true;
+            List<Action> a = new List<Action>();
+            a.Add(UpdateRender);
+            a.Add(UpdateKeys);
+            UpdateRender();
+//            Parallel.Invoke(UpdateRender, UpdateKeys);
+        }
+
+        /// <summary>
+        /// Перерисовка
+        /// </summary>
+        public void UpdateRender()
+        {
             while (true)
             {
                 if (!is_animation_start)
@@ -96,21 +109,27 @@ namespace ConsoleGame
                     break;
                 }
 
-                Update();
+                for (int i = 0; i < Scene.Count; i++)
+                {
+                    ((IObject) Scene[i]).Render();
+                }
+                UpdateKeys();
             }
+
+
         }
 
-        /// <summary>
-        /// Перерисовка
-        /// </summary>
-        public void Update()
+
+        public void UpdateKeys()
         {
-            for (int i = 0; i < Scene.Count; i++)
+            while (Console.KeyAvailable)
             {
-                ((IObject) Scene[i]).Render();
+                if (!is_animation_start)
+                    break;
+
+                ConsoleKey key = Console.ReadKey(true).Key;
+                Bindings.Exec(key);
             }
-            ConsoleKey key = Console.ReadKey(true).Key;
-            Bindings.Exec(key);
         }
 
         public void Stop() => is_animation_start = false;

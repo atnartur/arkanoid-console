@@ -1,4 +1,6 @@
-﻿namespace ConsoleGame
+﻿using System;
+
+namespace ConsoleGame
 {
     public class Ball : IObject
     {
@@ -9,8 +11,9 @@
         }
 
         private State _state = State.StandOnBoard;
+        private int _movingStep = 0;
         private char _symbol = '@';
-        private Vector2D _direction = new Vector2D();
+        private Vector2D _direction = new Vector2D(1, 1);
         private Board _board;
         private Vector2D _center;
 
@@ -18,22 +21,44 @@
         {
             _board = board;
             _center = _board.Center + new Vector2D(1, 0);
+
+            Renderer.Instance.Bindings.Add(ConsoleKey.Spacebar, StartMoving);
         }
         public void Render()
         {
-            Renderer.Instance.FillRect(' ', _center);
+            Vector2D vector_2 = new Vector2D(_center);
 
             switch (_state)
             {
                 case State.StandOnBoard:
-                    _center = _board.Center + new Vector2D(0, -1);
+                    vector_2 = _board.Center + new Vector2D(0, -1);
                     break;
                 case State.Moving:
-                    _center += _direction;
+                    if (_movingStep > 2)
+                    {
+                        vector_2 += _direction;
+                        _movingStep = 0;
+                    }
+                    else
+                    {
+                        _movingStep++;
+                    }
                     break;
             }
 
-            Renderer.Instance.FillRect(_symbol, _center);
+
+            if (!vector_2.Equals(_center))
+            {
+                Renderer.Instance.FillRect(' ', _center);
+                Renderer.Instance.FillRect(_symbol, vector_2);
+                _center = vector_2;
+            }
+
+        }
+
+        private void StartMoving()
+        {
+            _state = State.Moving;
         }
     }
 }
