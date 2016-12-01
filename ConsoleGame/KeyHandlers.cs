@@ -12,12 +12,7 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="renderer"></param>
         /// <returns></returns>
-        private static bool Quit(Renderer renderer)
-        {
-            renderer.Stop();
-            return true;
-        }
-
+        private static void Quit() => Renderer.Instance.Stop();
 
         /// <summary>
         /// Инициализация привязки обработчиков
@@ -26,6 +21,7 @@ namespace ConsoleGame
         public static void Attach(KeyBindings bindings)
         {
             bindings.Add(ConsoleKey.Q, Quit);
+            bindings.Add(ConsoleKey.Escape, Quit);
         }
     }
 }

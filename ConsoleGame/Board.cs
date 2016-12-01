@@ -5,7 +5,7 @@ namespace ConsoleGame
     /// <summary>
     /// Доска
     /// </summary>
-    public class Board
+    public class Board : IObject
     {
         /// <summary>
         /// Символ доски
@@ -20,12 +20,7 @@ namespace ConsoleGame
         /// <summary>
         /// Центральная точка вывода доски
         /// </summary>
-        private Vector2D center;
-
-        /// <summary>
-        /// Renderer
-        /// </summary>
-        private Renderer renderer;
+        public Vector2D Center { get; private set; }
 
         /// <summary>
         /// Максимальная высота подъема доски
@@ -36,49 +31,30 @@ namespace ConsoleGame
         /// Инициализация доски
         /// </summary>
         /// <param name="renderer"></param>
-        public Board(Renderer renderer)
+        public Board()
         {
-            center = new Vector2D(renderer.Width / 2, renderer.world.GetLength(0) - 1);
-
-            this.renderer = renderer;
+            Renderer renderer = Renderer.Instance;
+            Center = new Vector2D(renderer.Width / 2, 0);
             renderer.Bindings.Add(ConsoleKey.UpArrow, Up);
             renderer.Bindings.Add(ConsoleKey.DownArrow, Down);
             renderer.Bindings.Add(ConsoleKey.LeftArrow, Left);
             renderer.Bindings.Add(ConsoleKey.RightArrow, Right);
 
-            render();
+            Render();
         }
 
 
-        private void fill()
+        public void Render()
         {
+            Renderer renderer = Renderer.Instance;
+
             if(renderer.debug)
-                Console.WriteLine(center);
+                Console.WriteLine(Center);
 
-            int right = center.X + size;
-            int left = center.X - size;
+            Vector2D a = Center + new Vector2D(-size, 0);
+            Vector2D b = Center + new Vector2D(size, 0);
 
-            for(int i = left; i < right && right < renderer.Width - 1 && left > 0; i ++)
-                renderer.world[center.Y, i] = new Dot(symbol);
-        }
-
-        /// <summary>
-        /// Отрисовка доски
-        /// </summary>
-        private void render()
-        {
-            symbol = '=';
-            fill();
-        }
-
-
-        /// <summary>
-        /// Очистка отрисованной доски
-        /// </summary>
-        private void clean()
-        {
-            symbol = ' ';
-            fill();
+            renderer.FillRect(symbol, a, b);
         }
 
         /// <summary>
@@ -86,15 +62,18 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="renderer"></param>
         /// <returns></returns>
-        private bool Up(Renderer renderer)
+        private void Up()
         {
-            clean();
+            symbol = ' ';
 
-            if(center.Y > renderer.Height - max_height)
-                center += new Vector2D(0, -1);
+            Render();
+            Renderer renderer = Renderer.Instance;
 
-            render();
-            return true;
+            if(Center.Y > renderer.Height - max_height)
+                Center += new Vector2D(0, -1);
+            symbol = '=';
+
+            Render();
         }
 
 
@@ -103,14 +82,16 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="renderer"></param>
         /// <returns></returns>
-        private bool Down(Renderer renderer)
+        private void Down()
         {
-            clean();
-            if(center.Y < renderer.Height - 1)
-                center += new Vector2D(0, 1);
-            render();
-            return true;
+            symbol = ' ';
+            Render();
+            Renderer renderer = Renderer.Instance;
 
+            if(Center.Y < renderer.Height - 1)
+                Center += new Vector2D(0, 1);
+            symbol = '=';
+            Render();
         }
 
 
@@ -119,14 +100,16 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="renderer"></param>
         /// <returns></returns>
-        private bool Left(Renderer renderer)
+        private void Left()
         {
-            clean();
-            if(center.X > size + 1)
-                center += new Vector2D(-1, 0);
+            symbol = ' ';
+            Render();
 
-            render();
-            return true;
+            if(Center.X > size + 1)
+                Center += new Vector2D(-1, 0);
+            symbol = '=';
+
+            Render();
         }
 
 
@@ -135,13 +118,19 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="renderer"></param>
         /// <returns></returns>
-        private bool Right(Renderer renderer)
+        private void Right()
         {
-            clean();
-            if(center.X < renderer.Width - 2 - size)
-                center += new Vector2D(1, 0);
-            render();
-            return true;
+            symbol = ' ';
+
+            Render();
+
+            Renderer renderer = Renderer.Instance;
+
+            if(Center.X < renderer.Width - 2 - size)
+                Center += new Vector2D(1, 0);
+            symbol = '=';
+
+            Render();
         }
     }
 }

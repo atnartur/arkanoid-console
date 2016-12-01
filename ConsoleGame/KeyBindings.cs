@@ -14,7 +14,7 @@ namespace ConsoleGame
         /// Словарь: ключ - ConsoleKey (клавиша), которая была нажата;
         /// значение - функция, принимающая объект типа Renderer и возвращающаяя булево значение, вызовется при нажатии клавиши
         /// </summary>
-        private readonly Dictionary<ConsoleKey, Func<Renderer, bool>> _bindings = new Dictionary<ConsoleKey, Func<Renderer, bool>>();
+        private readonly Dictionary<ConsoleKey, Action> _bindings = new Dictionary<ConsoleKey, Action>();
 
         /// <summary>
         /// Метод вызова функции при нажатии клавиши
@@ -22,14 +22,14 @@ namespace ConsoleGame
         /// <param name="key">клавиша, которая была нажата</param>
         /// <param name="renderer">объект Renderer</param>
         /// <returns>true, если обработчик был вызван, и false, если обработчик не был вызван</returns>
-        public bool Exec(ConsoleKey key, Renderer renderer)
+        public bool Exec(ConsoleKey key)
         {
-            Func<Renderer, bool> callback;
+            Action callback;
 
             _bindings.TryGetValue(key, out callback);
 
             try{
-                callback.Invoke(renderer);
+                callback.Invoke();
             }
             catch (NullReferenceException)
             {
@@ -43,7 +43,7 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="key">Клавиша</param>
         /// <param name="callback">Функция, которая вызовется при нажатии на эту клавишу</param>
-        public void Add(ConsoleKey key, Func<Renderer, bool> callback) => _bindings.Add(key, callback);
+        public void Add(ConsoleKey key, Action callback) => _bindings.Add(key, callback);
 
 
         /// <summary>

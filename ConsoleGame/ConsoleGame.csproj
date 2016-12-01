@@ -41,8 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ball.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Dot.cs" />
+    <Compile Include="Help.cs" />
+    <Compile Include="IObject.cs" />
     <Compile Include="KeyBindings.cs" />
     <Compile Include="KeyHandlers.cs" />
     <Compile Include="Renderer.cs" />
@@ -51,7 +54,7 @@
     <Compile Include="Vector2D.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="README.md" />
+    <Content Include="help.txt" />
     <Content Include="run.sh" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
