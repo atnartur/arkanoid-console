@@ -38,10 +38,22 @@ namespace ConsoleGame
 
             renderer.PrintLineWithMargin("", 3, ConsoleColor.Black);
 
-            while (Console.ReadKey(true).Key != ConsoleKey.Spacebar){}
-
-            renderer.DrawCanvas();
-            renderer.Start();
+            bool waitingForStart = true;
+            while (waitingForStart)
+            {
+                switch (Console.ReadKey(true).Key)
+                {
+                    case ConsoleKey.Spacebar:
+                        waitingForStart = false;
+                        Start.StartGame();
+                        break;
+                    case ConsoleKey.Q:
+                    case ConsoleKey.Escape:
+                        waitingForStart = false;
+                        renderer.Clear();
+                        break;
+                }
+            }
         }
 
         private void ReadFile()
