@@ -10,8 +10,6 @@ namespace ConsoleGame
         /// <summary>
         /// Выход из игры при нажатии на Q
         /// </summary>
-        /// <param name="renderer"></param>
-        /// <returns></returns>
         private static void Quit() => Renderer.Instance.Stop();
 
         /// <summary>

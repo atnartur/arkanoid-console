@@ -5,10 +5,13 @@ using System.Text;
 namespace ConsoleGame
 {
     /// <summary>
-    /// Консольный ренделрер
+    /// Консольный рендерер
     /// </summary>
     public sealed class Renderer
     {
+        /// <summary>
+        /// Singleton патерн
+        /// </summary>
         private static Renderer _instance;
 
         public static Renderer Instance
@@ -20,11 +23,6 @@ namespace ConsoleGame
                 return _instance;
             }
         }
-
-        /// <summary>
-        /// Текущая позиция курсора
-        /// </summary>
-//        readonly Vector2D CursorCurrentPosition = new Vector2D();
 
         /// <summary>
         /// Ширина экрана
@@ -46,9 +44,15 @@ namespace ConsoleGame
         /// </summary>
         public KeyBindings Bindings = new KeyBindings();
 
+        /// <summary>
+        /// Объекты на сцвене
+        /// </summary>
         public List<IObject> Scene = new List<IObject>();
 
-        private ConsoleColor _background_color;
+        /// <summary>
+        /// Фоновый цвет
+        /// </summary>
+        private ConsoleColor _backgroundColor;
 
         /// <summary>
         /// Флаг отладки
@@ -57,8 +61,6 @@ namespace ConsoleGame
 
         private Renderer()
         {
-//            Console.WriteLine(DateTime.Now);
-
 //            debug = true;
 
             Width = Console.WindowWidth;
@@ -68,14 +70,10 @@ namespace ConsoleGame
                 Height -= 2;
 
             SetBackgroundColor(ConsoleColor.DarkBlue);
-//            Console.ForegroundColor = ConsoleColor.Green;
 
             KeyHandlers.Attach(Bindings);
             Console.CursorVisible = false;
             // @TODO: подумать насчет хранения объектов. Dependency Injection?
-
-//            Draw();
-//            Update();
         }
 
 
@@ -85,31 +83,25 @@ namespace ConsoleGame
         /// <param name="color">цвет из System.ConsoleColor</param>
         public void SetBackgroundColor(ConsoleColor color)
         {
-            _background_color = color;
+            _backgroundColor = color;
             ResetBackgroundColor();
         }
-        public void ResetBackgroundColor() => Console.BackgroundColor = _background_color;
+
+        /// <summary>
+        /// Установка фонового цвета из переменной объекта
+        /// </summary>
+        public void ResetBackgroundColor() => Console.BackgroundColor = _backgroundColor;
+
         /// <summary>
         /// Запуск перерисовки
         /// </summary>
         public void Start()
         {
             is_animation_start = true;
-            List<Action> a = new List<Action>();
-            a.Add(UpdateRender);
-            a.Add(UpdateKeys);
-            UpdateRender();
-//            Parallel.Invoke(UpdateRender, UpdateKeys);
-        }
 
-        /// <summary>
-        /// Перерисовка
-        /// </summary>
-        public void UpdateRender()
-        {
             while (true)
             {
-                if (!is_animation_start)
+                if (!is_animation_start) // выход из перерисовки
                 {
                     Clear();
                     break;
@@ -119,25 +111,20 @@ namespace ConsoleGame
                 {
                     ((IObject) Scene[i]).Render();
                 }
-                UpdateKeys();
-            }
 
 
-        }
-
-
-        public void UpdateKeys()
-        {
-            while (Console.KeyAvailable)
-            {
-                if (!is_animation_start)
-                    break;
-
-                ConsoleKey key = Console.ReadKey(true).Key;
-                Bindings.Exec(key);
+                // если в данный момент была нажата клавиша - обрабатываем нажатия
+                while (Console.KeyAvailable)
+                {
+                    ConsoleKey key = Console.ReadKey(true).Key;
+                    Bindings.Exec(key);
+                }
             }
         }
 
+        /// <summary>
+        /// Остановка перерисовки
+        /// </summary>
         public void Stop() => is_animation_start = false;
 
         /// <summary>
@@ -187,12 +174,18 @@ namespace ConsoleGame
             }
         }
 
+        /// <summary>
+        /// Вывести текст с отступом
+        /// </summary>
+        /// <param name="line">Текст</param>
+        /// <param name="margin_left">Отступ от краев консоли</param>
+        /// <param name="bg_color">фоновый цвет</param>
         public void PrintLineWithMargin(String line, int margin_left, ConsoleColor bg_color = 0)
         {
             if (margin_left < 0)
                 margin_left = 0;
 
-            if (bg_color != _background_color)
+            if (bg_color != _backgroundColor)
                 Console.BackgroundColor = bg_color;
 
             if (line.Length == 0)
@@ -251,6 +244,12 @@ namespace ConsoleGame
             ResetBackgroundColor();
 
         }
+
+        /// <summary>
+        /// Вывести текст по центру
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="bg_color"></param>
         public void PrintLineOnCenter(String line, ConsoleColor bg_color = 0)
             => PrintLineWithMargin(line, (this.Width - line.Length) / 2, bg_color);
     }

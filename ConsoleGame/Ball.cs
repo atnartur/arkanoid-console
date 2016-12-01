@@ -2,8 +2,14 @@
 
 namespace ConsoleGame
 {
+    /// <summary>
+    /// Шарик
+    /// </summary>
     public class Ball : IObject
     {
+        /// <summary>
+        /// Состояния шарика
+        /// </summary>
         enum State
         {
             StandOnBoard,
@@ -11,23 +17,54 @@ namespace ConsoleGame
             Stop
         }
 
+        /// <summary>
+        /// Текущее состояние
+        /// </summary>
         private State _state = State.StandOnBoard;
-        private int _movingStep = 0;
-        private char _symbol = '@';
-        private Vector2D _direction = new Vector2D(1, 1);
-        private Board _board;
-        private Vector2D _center;
 
+        /// <summary>
+        /// Номер кадра для движения
+        /// </summary>
+        private int _movingStep = 0;
+
+        /// <summary>
+        /// Символ шарика
+        /// </summary>
+        private readonly char _symbol = '@';
+
+        /// <summary>
+        /// Направление движения шарика
+        /// </summary>
+        private Vector2D _direction = new Vector2D(1, 1);
+
+        /// <summary>
+        ///
+        /// </summary>
+        private readonly Board _board;
+
+        /// <summary>
+        /// Место нахождения шарика
+        /// </summary>
+        public Vector2D Center { get; private set; }
+
+        /// <summary>
+        /// Инициализация шарика
+        /// </summary>
+        /// <param name="board">Доска</param>
         public Ball(Board board)
         {
             _board = board;
-            _center = _board.Center + new Vector2D(1, 0);
+            Center = _board.Center + new Vector2D(1, 0);
 
             Renderer.Instance.Bindings.Add(ConsoleKey.Spacebar, StartMoving);
         }
+
+        /// <summary>
+        /// Отображение
+        /// </summary>
         public void Render()
         {
-            Vector2D vector_2 = new Vector2D(_center);
+            Vector2D vector_2 = new Vector2D(Center);
 
             switch (_state)
             {
@@ -58,18 +95,18 @@ namespace ConsoleGame
             }
 
 
-            if (!vector_2.Equals(_center))
+            if (!vector_2.Equals(Center))
             {
-                Renderer.Instance.FillRect(' ', _center);
+                Renderer.Instance.FillRect(' ', Center);
                 Renderer.Instance.FillRect(_symbol, vector_2);
-                _center = vector_2;
+                Center = vector_2;
             }
 
         }
 
-        private void StartMoving()
-        {
-            _state = State.Moving;
-        }
+        /// <summary>
+        /// Запуск движения
+        /// </summary>
+        private void StartMoving() => _state = State.Moving;
     }
 }
