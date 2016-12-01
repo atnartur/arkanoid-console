@@ -48,6 +48,8 @@ namespace ConsoleGame
 
         public List<IObject> Scene = new List<IObject>();
 
+        private ConsoleColor _background_color;
+
         /// <summary>
         /// Флаг отладки
         /// </summary>
@@ -81,8 +83,12 @@ namespace ConsoleGame
         /// Установка фонового цвета консоли
         /// </summary>
         /// <param name="color">цвет из System.ConsoleColor</param>
-        public void SetBackgroundColor(ConsoleColor color) => Console.BackgroundColor = color;
-
+        public void SetBackgroundColor(ConsoleColor color)
+        {
+            _background_color = color;
+            ResetBackgroundColor();
+        }
+        public void ResetBackgroundColor() => Console.BackgroundColor = _background_color;
         /// <summary>
         /// Запуск перерисовки
         /// </summary>
@@ -181,16 +187,21 @@ namespace ConsoleGame
             }
         }
 
-        public void PrintLineWithMargin(String line, int margin)
+        public void PrintLineWithMargin(String line, int margin_left, ConsoleColor bg_color = 0)
         {
-            int margin_left = margin;
-
             if (margin_left < 0)
                 margin_left = 0;
 
+            if (bg_color != _background_color)
+                Console.BackgroundColor = bg_color;
 
-
-            if (line.Length > Width - margin_left * 2)
+            if (line.Length == 0)
+            {
+                for (int i = 0; i < Width; i++)
+                    Console.Write(' ');
+                Console.WriteLine();
+            }
+            else if (line.Length > Width - margin_left * 2)
             {
                 List<String> words = new List<string>(line.Split(' '));
 
@@ -215,11 +226,14 @@ namespace ConsoleGame
                         Console.Write(' ');
 
                     Console.Write(str);
+
+                    for(int i = 0; i < Width - margin_left - str_length; i++)
+                        Console.Write(' ');
+
                     Console.WriteLine();
                     str.Clear();
                     str_length = 0;
                 }
-
             }
             else
             {
@@ -227,9 +241,17 @@ namespace ConsoleGame
                     Console.Write(' ');
 
                 Console.Write(line);
+
+                for(int i = 0; i < Width - margin_left - line.Length; i++)
+                    Console.Write(' ');
+
+                Console.WriteLine();
             }
-            Console.WriteLine();
+
+            ResetBackgroundColor();
+
         }
-        public void PrintLineOnCenter(String line) => PrintLineWithMargin(line, (this.Width - line.Length) / 2);
+        public void PrintLineOnCenter(String line, ConsoleColor bg_color = 0)
+            => PrintLineWithMargin(line, (this.Width - line.Length) / 2, bg_color);
     }
 }

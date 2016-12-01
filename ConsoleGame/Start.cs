@@ -50,6 +50,7 @@ namespace ConsoleGame
             Board board = new Board();
             Ball ball = new Ball(board);
             Help help = new Help();
+            help.Show();
             renderer.Scene.Add(ball);
             renderer.Scene.Add(board);
 

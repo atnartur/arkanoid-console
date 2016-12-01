@@ -11,10 +11,10 @@ namespace ConsoleGame
         public Help()
         {
             ReadFile();
-            Renderer.Instance.Bindings.Add(ConsoleKey.F1, ShowHelp);
+            Renderer.Instance.Bindings.Add(ConsoleKey.F1, Show);
         }
 
-        public void ShowHelp()
+        public void Show()
         {
             Renderer renderer = Renderer.Instance;
             renderer.Stop();
@@ -28,13 +28,15 @@ namespace ConsoleGame
 
             Console.SetCursorPosition(0, margin_top);
 
-            renderer.PrintLineOnCenter(_content[0]);
+            renderer.PrintLineOnCenter(_content[0], ConsoleColor.Green);
 
             for (int i = 1; i < _content.Length; i++)
             {
-                Thread.Sleep(100);
-                renderer.PrintLineWithMargin(_content[i], 3);
+                Thread.Sleep(50);
+                renderer.PrintLineWithMargin(_content[i], 3, ConsoleColor.Black);
             }
+
+            renderer.PrintLineWithMargin("", 3, ConsoleColor.Black);
 
             while (Console.ReadKey(true).Key != ConsoleKey.Spacebar){}
 
