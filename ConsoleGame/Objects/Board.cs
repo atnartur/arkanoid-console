@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleGame
+namespace ConsoleGame.Objects
 {
     /// <summary>
     /// Доска

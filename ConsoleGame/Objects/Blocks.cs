@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ConsoleGame
+namespace ConsoleGame.Objects
 {
     /// <summary>
     /// Блоки

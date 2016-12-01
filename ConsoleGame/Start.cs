@@ -1,4 +1,5 @@
 ﻿using System;
+using ConsoleGame.Objects;
 
 namespace ConsoleGame
 {
