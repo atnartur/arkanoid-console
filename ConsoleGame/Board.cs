@@ -69,7 +69,7 @@ namespace ConsoleGame
             Render();
             Renderer renderer = Renderer.Instance;
 
-            if(Center.Y > renderer.Height - max_height)
+            if(Center.Y < max_height)
                 Center += new Vector2D(0, 1);
             symbol = '=';
 
@@ -86,7 +86,7 @@ namespace ConsoleGame
             Render();
             Renderer renderer = Renderer.Instance;
 
-            if(Center.Y < renderer.Height - 1)
+            if(Center.Y > 0)
                 Center += new Vector2D(0, -1);
             symbol = '=';
             Render();
