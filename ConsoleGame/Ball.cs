@@ -13,21 +13,21 @@ namespace ConsoleGame
 
         private State _state = State.StandOnBoard;
         private int _movingStep = 0;
-        private char _symbol = '@';
+        private readonly char _symbol = '@';
         private Vector2D _direction = new Vector2D(1, 1);
-        private Board _board;
-        private Vector2D _center;
+        private readonly Board _board;
+        public Vector2D Center { get; private set; }
 
         public Ball(Board board)
         {
             _board = board;
-            _center = _board.Center + new Vector2D(1, 0);
+            Center = _board.Center + new Vector2D(1, 0);
 
             Renderer.Instance.Bindings.Add(ConsoleKey.Spacebar, StartMoving);
         }
         public void Render()
         {
-            Vector2D vector_2 = new Vector2D(_center);
+            Vector2D vector_2 = new Vector2D(Center);
 
             switch (_state)
             {
@@ -58,11 +58,11 @@ namespace ConsoleGame
             }
 
 
-            if (!vector_2.Equals(_center))
+            if (!vector_2.Equals(Center))
             {
-                Renderer.Instance.FillRect(' ', _center);
+                Renderer.Instance.FillRect(' ', Center);
                 Renderer.Instance.FillRect(_symbol, vector_2);
-                _center = vector_2;
+                Center = vector_2;
             }
 
         }
