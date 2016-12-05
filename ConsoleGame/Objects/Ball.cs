@@ -42,6 +42,8 @@ namespace ConsoleGame.Objects
         /// </summary>
         private readonly Board _board;
 
+        private readonly Score _score;
+
         /// <summary>
         /// Место нахождения шарика
         /// </summary>
@@ -51,13 +53,17 @@ namespace ConsoleGame.Objects
         /// Инициализация шарика
         /// </summary>
         /// <param name="board">Доска</param>
-        public Ball(Board board)
+        public Ball(Board board, Score score)
         {
             _board = board;
-            Center = _board.Center + new Vector2D(1, 0);
-
+            _score = score;
+            ResetPosition();
             Renderer.Instance.Bindings.Add(ConsoleKey.Spacebar, StartMoving);
         }
+
+        public void ResetPosition() => Center = _board.Center + new Vector2D(1, 0);
+
+        public void Clear() => Renderer.Instance.FillRect(' ', Center);
 
         /// <summary>
         /// Отображение
@@ -103,7 +109,18 @@ namespace ConsoleGame.Objects
                             {
                                 _direction = new Vector2D(0, 0);
                                 // @TODO: окно проигрыша
+
+                                _score.Hp--;
                                 _state = State.Stop;
+
+                                if (_score.Hp > 0)
+                                {
+                                    _board.Clear();
+                                    Clear();
+
+                                    _board.ResetPosition();
+                                    ResetPosition();
+                                }
                             }
                         }
                         vector_2 += _direction;

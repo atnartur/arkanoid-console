@@ -35,13 +35,25 @@ namespace ConsoleGame.Objects
         {
             Size = 3;
             Renderer renderer = Renderer.Instance;
-            Center = new Vector2D(renderer.Width / 2, 2);
+            ResetPosition();
             renderer.Bindings.Add(ConsoleKey.UpArrow, Up);
             renderer.Bindings.Add(ConsoleKey.DownArrow, Down);
             renderer.Bindings.Add(ConsoleKey.LeftArrow, Left);
             renderer.Bindings.Add(ConsoleKey.RightArrow, Right);
 
             Render();
+        }
+
+        public void ResetPosition() => Center = new Vector2D(Renderer.Instance.Width / 2, 2);
+
+        public void Clear()
+        {
+            Renderer renderer = Renderer.Instance;
+
+            Vector2D a = Center + new Vector2D(-Size, 0);
+            Vector2D b = Center + new Vector2D(Size, 0);
+
+            renderer.FillRect(' ', a, b);
         }
 
         /// <summary>

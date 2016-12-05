@@ -26,8 +26,8 @@ namespace ConsoleGame
             Renderer renderer = Renderer.Instance;
 
             Board board = new Board();
-            Ball ball = new Ball(board);
             Score score = new Score();
+            Ball ball = new Ball(board, score);
             Blocks blocks = new Blocks(ball, score);
 
             renderer.Scene.Add(score);
