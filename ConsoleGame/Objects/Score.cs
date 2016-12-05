@@ -26,13 +26,10 @@ namespace ConsoleGame.Objects
                 );
 
                 string line = "Your score: ";
-
                 int margin = 5;
 
                 renderer.PrintLineWithMargin(line, margin, ConsoleColor.Black, true);
-
                 _numberCursorPosition = new Vector2D(line.Length + margin, 0);
-
                 _isInitialized = true;
             }
 

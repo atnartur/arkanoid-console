@@ -66,6 +66,8 @@ namespace ConsoleGame.Objects
         {
             Vector2D vector_2 = new Vector2D(Center);
 
+//            bool firstFrame = true;
+
             switch (_state)
             {
                 case State.StandOnBoard:
@@ -82,14 +84,40 @@ namespace ConsoleGame.Objects
                         {
                             ChangeDirection();
                         }
-                        else if (vector_2.Y <= 2)
+                        else if (vector_2.Y <= 3)
                         {
-                            _direction = new Vector2D(0, 0);
-                            _state = State.Stop;
+                            if (
+                                vector_2.Y == _board.Center.Y + 1 &&
+                                vector_2.X >= _board.Center.X - _board.Size &&
+                                vector_2.X <= _board.Center.X + _board.Size
+                            )
+                            {
+
+
+                                if (_direction.Equals(new Vector2D(1, -1)))
+                                    _direction = new Vector2D(-1, 1);
+                                else if (_direction.Equals(new Vector2D(-1, -1)))
+                                    _direction = new Vector2D(1, 1);
+
+                                //                            new
+                                //                            ChangeDirection();
+                                //                            ChangeDirection();
+                                //                            ChangeDirection();
+
+                            }
+                            else
+                            {
+                                {
+                                    _direction = new Vector2D(0, 0);
+                                    // @TODO: окно проигрыша
+                                    _state = State.Stop;
+                                }
+                            }
+
                         }
-
-
                         vector_2 += _direction;
+//                        firstFrame = false;
+
                         _movingStep = 0;
                     }
                     else
@@ -111,13 +139,13 @@ namespace ConsoleGame.Objects
             Vector2D v = new Vector2D(_direction);
 
             if(v.X == 1 && v.Y == 1)
-                v = new Vector2D(-1, 1);
-            else if(v.X == -1 && v.Y == 1)
-                v = new Vector2D(-1, -1);
-            else if(v.X == -1 && v.Y == -1)
                 v = new Vector2D(1, -1);
-            else
+            else if(v.X == -1 && v.Y == 1)
+                v = new Vector2D(-1, 1);
+            else if(v.X == -1 && v.Y == -1)
                 v = new Vector2D(1, 1);
+            else
+                v = new Vector2D(-1, -1);
 
             _direction = v;
         }

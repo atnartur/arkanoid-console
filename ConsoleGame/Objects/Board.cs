@@ -15,7 +15,7 @@ namespace ConsoleGame.Objects
         /// <summary>
         /// Размер доски (вернее, максимальное смещение от центрального символа
         /// </summary>
-        private int size = 3;
+        public int Size { get; private set; }
 
         /// <summary>
         /// Центральная точка вывода доски
@@ -33,6 +33,7 @@ namespace ConsoleGame.Objects
         /// <param name="renderer"></param>
         public Board()
         {
+            Size = 3;
             Renderer renderer = Renderer.Instance;
             Center = new Vector2D(renderer.Width / 2, 2);
             renderer.Bindings.Add(ConsoleKey.UpArrow, Up);
@@ -53,8 +54,8 @@ namespace ConsoleGame.Objects
             if(renderer.debug)
                 Console.WriteLine(Center);
 
-            Vector2D a = Center + new Vector2D(-size, 0);
-            Vector2D b = Center + new Vector2D(size, 0);
+            Vector2D a = Center + new Vector2D(-Size, 0);
+            Vector2D b = Center + new Vector2D(Size, 0);
 
             renderer.FillRect(symbol, a, b);
         }
@@ -101,7 +102,7 @@ namespace ConsoleGame.Objects
             symbol = ' ';
             Render();
 
-            if(Center.X > size + 1)
+            if(Center.X > Size + 1)
                 Center += new Vector2D(-3, 0);
             symbol = '=';
 
@@ -120,7 +121,7 @@ namespace ConsoleGame.Objects
 
             Renderer renderer = Renderer.Instance;
 
-            if(Center.X < renderer.Width - 2 - size)
+            if(Center.X < renderer.Width - 2 - Size)
                 Center += new Vector2D(3, 0);
             symbol = '=';
 
