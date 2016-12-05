@@ -1,9 +1,13 @@
-﻿namespace ConsoleGame.Objects
+﻿using System;
+
+namespace ConsoleGame.Objects
 {
     public class Score : IObject
     {
         public int Count { get; private set; }
         private bool _isInitialized = false;
+        private Vector2D _numberCursorPosition;
+
         public Score()
         {
             Count = 0;
@@ -17,11 +21,30 @@
             {
                 renderer.FillRect(
                     '-',
-                    new Vector2D(0, 2),
-                    new Vector2D(renderer.Width - 1, 2)
+                    new Vector2D(0, 0),
+                    new Vector2D(renderer.Width - 1, 0)
                 );
+
+                string line = "Your score: ";
+
+                int margin = 5;
+
+                renderer.PrintLineWithMargin(line, margin, ConsoleColor.Black, true);
+
+                _numberCursorPosition = new Vector2D(line.Length + margin, 0);
+
                 _isInitialized = true;
             }
+//            Console.WriteLine(_numberCursorPosition);
+
+            RenderCount();
+        }
+
+        private void RenderCount()
+        {
+            Renderer renderer = Renderer.Instance;
+            renderer.SetCursorPosition(_numberCursorPosition);
+            renderer.Write(Count);
         }
     }
 }

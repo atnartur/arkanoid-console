@@ -34,7 +34,7 @@ namespace ConsoleGame.Objects
         public Board()
         {
             Renderer renderer = Renderer.Instance;
-            Center = new Vector2D(renderer.Width / 2, 3);
+            Center = new Vector2D(renderer.Width / 2, 2);
             renderer.Bindings.Add(ConsoleKey.UpArrow, Up);
             renderer.Bindings.Add(ConsoleKey.DownArrow, Down);
             renderer.Bindings.Add(ConsoleKey.LeftArrow, Left);
@@ -86,7 +86,7 @@ namespace ConsoleGame.Objects
             Render();
             Renderer renderer = Renderer.Instance;
 
-            if(Center.Y > 0)
+            if(Center.Y > 2)
                 Center += new Vector2D(0, -1);
             symbol = '=';
             Render();

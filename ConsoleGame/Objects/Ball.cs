@@ -83,7 +83,7 @@ namespace ConsoleGame.Objects
                         // ограничение движений по оси Y
                         if(vector_2.Y >= Renderer.Instance.Height - 1)
                             _direction = new Vector2D(-1, -1);
-                        else if (vector_2.Y <= 3)
+                        else if (vector_2.Y <= 2)
                         {
                             _direction = new Vector2D(0, 0);
                             _state = State.Stop;
