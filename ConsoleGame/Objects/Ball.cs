@@ -85,18 +85,16 @@ namespace ConsoleGame.Objects
                             _direction = new Vector2D(-1, -1);
                         else if (vector_2.Y <= 0)
                         {
+                            _direction = new Vector2D(0, 0);
                             _state = State.Stop;
-                            
-                        }
 
+                        }
 
                         vector_2 += _direction;
                         _movingStep = 0;
                     }
                     else
-                    {
                         _movingStep++;
-                    }
                     break;
             }
 
@@ -107,7 +105,6 @@ namespace ConsoleGame.Objects
                 Renderer.Instance.FillRect(_symbol, vector_2);
                 Center = vector_2;
             }
-
         }
 
         /// <summary>
