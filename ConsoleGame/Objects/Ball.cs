@@ -38,10 +38,13 @@ namespace ConsoleGame.Objects
         private Vector2D _direction = new Vector2D(1, 1);
 
         /// <summary>
-        ///
+        /// Доска
         /// </summary>
         private readonly Board _board;
 
+        /// <summary>
+        /// Панель результатов
+        /// </summary>
         private readonly Score _score;
 
         /// <summary>
@@ -61,8 +64,14 @@ namespace ConsoleGame.Objects
             Renderer.Instance.Bindings.Add(ConsoleKey.Spacebar, StartMoving);
         }
 
+        /// <summary>
+        /// Сборс позиции
+        /// </summary>
         public void ResetPosition() => Center = _board.Center + new Vector2D(1, 0);
 
+        /// <summary>
+        /// Очистка экрана от этого объекта
+        /// </summary>
         public void Clear() => Renderer.Instance.FillRect(' ', Center);
 
         /// <summary>
@@ -141,6 +150,9 @@ namespace ConsoleGame.Objects
             }
         }
 
+        /// <summary>
+        /// Изменение направиления
+        /// </summary>
         public void ChangeDirection()
         {
             Vector2D v = new Vector2D(_direction);

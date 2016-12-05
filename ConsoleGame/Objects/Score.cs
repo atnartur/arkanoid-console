@@ -2,12 +2,34 @@
 
 namespace ConsoleGame.Objects
 {
+    /// <summary>
+    /// Доска с результатами
+    /// </summary>
     public class Score : IObject
     {
+        /// <summary>
+        /// Количество очков
+        /// </summary>
         public int Count { get; set; }
+
+        /// <summary>
+        /// Количество жизней
+        /// </summary>
         public int Hp { get; set; }
+
+        /// <summary>
+        /// Флаг инициализации
+        /// </summary>
         private bool _isInitialized = false;
+
+        /// <summary>
+        /// Позиция курсора для очков
+        /// </summary>
         private Vector2D _countCursorPosition;
+
+        /// <summary>
+        /// Позиция курсора для HP
+        /// </summary>
         private Vector2D _hpCursorPosition;
 
         public Score()
@@ -16,6 +38,9 @@ namespace ConsoleGame.Objects
             Hp = 3;
         }
 
+        /// <summary>
+        /// Отображение
+        /// </summary>
         public void Render()
         {
             Renderer renderer = Renderer.Instance;
@@ -44,6 +69,11 @@ namespace ConsoleGame.Objects
             RenderHp();
         }
 
+        /// <summary>
+        /// Отображение цифры на позиции курсора
+        /// </summary>
+        /// <param name="cursor_position"></param>
+        /// <param name="number"></param>
         private void RenderNumber(Vector2D cursor_position, int number)
         {
             Renderer renderer = Renderer.Instance;
@@ -53,7 +83,14 @@ namespace ConsoleGame.Objects
             renderer.ResetBackgroundColor();
         }
 
+        /// <summary>
+        /// Отображение количества очков
+        /// </summary>
         private void RenderCount() => RenderNumber(_countCursorPosition, Count);
+
+        /// <summary>
+        /// Отображение жизней
+        /// </summary>
         private void RenderHp() => RenderNumber(_hpCursorPosition, Hp);
     }
 }

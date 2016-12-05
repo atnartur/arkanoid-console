@@ -44,8 +44,14 @@ namespace ConsoleGame.Objects
             Render();
         }
 
+        /// <summary>
+        /// Сброс позиции
+        /// </summary>
         public void ResetPosition() => Center = new Vector2D(Renderer.Instance.Width / 2, 2);
 
+        /// <summary>
+        /// Очистка экрана от этого объекта
+        /// </summary>
         public void Clear()
         {
             Renderer renderer = Renderer.Instance;

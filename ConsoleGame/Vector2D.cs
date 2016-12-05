@@ -79,6 +79,12 @@ namespace ConsoleGame
             return res;
         }
 
+        /// <summary>
+        /// Умножение векторов
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static Vector2D Mult(Vector2D a, Vector2D b)
         {
             Vector2D res = new Vector2D(a);

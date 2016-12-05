@@ -28,7 +28,10 @@ namespace ConsoleGame.Objects
         /// </summary>
         private List<Vector2D> _renderedDots;
 
-        private int BottomLine = Renderer.Instance.Height * 3 / 4;
+        /// <summary>
+        /// Позиция нижней линии
+        /// </summary>
+        private readonly int _bottomLine = Renderer.Instance.Height * 3 / 4;
 
         /// <summary>
         /// Инициализация блоков
@@ -53,15 +56,13 @@ namespace ConsoleGame.Objects
                 _renderedDots = Dots;
             }
 
-            if (_ball.Center.Y >= BottomLine - 1)
+            if (_ball.Center.Y >= _bottomLine - 1)
             {
                 for (int i = Dots.Count - 1; i >= 0; i--)
                 {
                     if (_ball.Center.X == Dots[i].X && _ball.Center.Y + 1 == Dots[i].Y)
                     {
                         _ball.ChangeDirection();
-//                        _ball.ChangeDirection();
-//                        _ball.ChangeDirection();
                         Renderer.Instance.FillRect(' ', Dots[i]);
                         _score.Count++;
                         Dots.RemoveAt(i);
@@ -78,7 +79,7 @@ namespace ConsoleGame.Objects
         {
             Dots = new List<Vector2D>();
             for (int x = 0; x < Renderer.Instance.Width; x++)
-                for (int y = Renderer.Instance.Height - 1; y >= BottomLine; y--)
+                for (int y = Renderer.Instance.Height - 1; y >= _bottomLine; y--)
                     Dots.Add(new Vector2D(x, y));
         }
     }
