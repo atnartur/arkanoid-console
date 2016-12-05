@@ -79,6 +79,15 @@ namespace ConsoleGame
             return res;
         }
 
+        public static Vector2D Mult(Vector2D a, Vector2D b)
+        {
+            Vector2D res = new Vector2D(a);
+            res.X *= b.X;
+            res.Y *= b.Y;
+            return res;
+        }
+
         public static Vector2D operator +(Vector2D a, Vector2D b) => Sum(a, b);
+        public static Vector2D operator *(Vector2D a, Vector2D b) => Mult(a, b);
     }
 }

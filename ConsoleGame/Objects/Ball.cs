@@ -76,47 +76,37 @@ namespace ConsoleGame.Objects
                 case State.Moving:
                     if (_movingStep > 1000)
                     {
-                        if (
-                            vector_2.X >= Renderer.Instance.Width - 1 ||
-                            vector_2.X <= 0 ||
-                            vector_2.Y >= Renderer.Instance.Height - 1
-                        )
-                        {
-                            ChangeDirection();
-                        }
+                        // если мы уткнулись в правую или левую стенки
+                        if(vector_2.X >= Renderer.Instance.Width - 1 || vector_2.X <= 0)
+                            _direction *= new Vector2D(-1, 1); // инвертируем координату направления движения по Х
+
+                        // если мы уткнулись вверх
+                        else if (vector_2.Y >= Renderer.Instance.Height - 1)
+                            _direction *= new Vector2D(1, -1); // инвертируем координату направления движения по У
+
+                        // если мы приблизились к низу
                         else if (vector_2.Y <= 3)
                         {
+                            // если мы воткнулись в доску
                             if (
                                 vector_2.Y == _board.Center.Y + 1 &&
                                 vector_2.X >= _board.Center.X - _board.Size &&
                                 vector_2.X <= _board.Center.X + _board.Size
                             )
                             {
-
-
                                 if (_direction.Equals(new Vector2D(1, -1)))
-                                    _direction = new Vector2D(-1, 1);
-                                else if (_direction.Equals(new Vector2D(-1, -1)))
                                     _direction = new Vector2D(1, 1);
-
-                                //                            new
-                                //                            ChangeDirection();
-                                //                            ChangeDirection();
-                                //                            ChangeDirection();
-
+                                else if (_direction.Equals(new Vector2D(-1, -1)))
+                                    _direction = new Vector2D(-1, 1);
                             }
-                            else
+                            else // если мы воткнулись в низ
                             {
-                                {
-                                    _direction = new Vector2D(0, 0);
-                                    // @TODO: окно проигрыша
-                                    _state = State.Stop;
-                                }
+                                _direction = new Vector2D(0, 0);
+                                // @TODO: окно проигрыша
+                                _state = State.Stop;
                             }
-
                         }
                         vector_2 += _direction;
-//                        firstFrame = false;
 
                         _movingStep = 0;
                     }
