@@ -35,7 +35,6 @@ namespace ConsoleGame.Objects
 
                 _isInitialized = true;
             }
-//            Console.WriteLine(_numberCursorPosition);
 
             RenderCount();
         }

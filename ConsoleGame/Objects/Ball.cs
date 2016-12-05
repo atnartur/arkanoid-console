@@ -74,21 +74,20 @@ namespace ConsoleGame.Objects
                 case State.Moving:
                     if (_movingStep > 1000)
                     {
-                        // ограничение движений по оси X
-                        if(vector_2.X >= Renderer.Instance.Width - 1)
-                            _direction = new Vector2D(-1, 1);
-                        else if(vector_2.X <= 0)
-                            _direction = new Vector2D(1, -1);
-
-                        // ограничение движений по оси Y
-                        if(vector_2.Y >= Renderer.Instance.Height - 1)
-                            _direction = new Vector2D(-1, -1);
+                        if (
+                            vector_2.X >= Renderer.Instance.Width - 1 ||
+                            vector_2.X <= 0 ||
+                            vector_2.Y >= Renderer.Instance.Height - 1
+                        )
+                        {
+                            _direction = ChangeDirection();
+                        }
                         else if (vector_2.Y <= 2)
                         {
                             _direction = new Vector2D(0, 0);
                             _state = State.Stop;
-
                         }
+
 
                         vector_2 += _direction;
                         _movingStep = 0;
@@ -105,6 +104,22 @@ namespace ConsoleGame.Objects
                 Renderer.Instance.FillRect(_symbol, vector_2);
                 Center = vector_2;
             }
+        }
+
+        public Vector2D ChangeDirection()
+        {
+            Vector2D v = new Vector2D(_direction);
+
+            if(v.X == 1 && v.Y == 1)
+                v = new Vector2D(-1, 1);
+            else if(v.X == -1 && v.Y == 1)
+                v = new Vector2D(-1, -1);
+            else if(v.X == -1 && v.Y == -1)
+                v = new Vector2D(1, -1);
+            else
+                v = new Vector2D(1, 1);
+
+            return v;
         }
 
         /// <summary>
