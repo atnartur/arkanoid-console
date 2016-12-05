@@ -14,6 +14,11 @@ namespace ConsoleGame.Objects
         private Ball _ball;
 
         /// <summary>
+        /// Очки
+        /// </summary>
+        private Score _score;
+
+        /// <summary>
         /// Массив точек
         /// </summary>
         public List<Vector2D> Dots { get; private set; }
@@ -29,9 +34,10 @@ namespace ConsoleGame.Objects
         /// Инициализация блоков
         /// </summary>
         /// <param name="ball">Шарик</param>
-        public Blocks(Ball ball)
+        public Blocks(Ball ball, Score score)
         {
             _ball = ball;
+            _score = score;
             Generate();
         }
 
@@ -56,6 +62,7 @@ namespace ConsoleGame.Objects
                         _ball.ChangeDirection();
                         _ball.ChangeDirection();
                         Renderer.Instance.FillRect(' ', Dots[i]);
+                        _score.Count++;
                         Dots.RemoveAt(i);
                         break;
                     }

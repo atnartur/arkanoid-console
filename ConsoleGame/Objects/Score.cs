@@ -4,7 +4,7 @@ namespace ConsoleGame.Objects
 {
     public class Score : IObject
     {
-        public int Count { get; private set; }
+        public int Count { get; set; }
         private bool _isInitialized = false;
         private Vector2D _numberCursorPosition;
 
