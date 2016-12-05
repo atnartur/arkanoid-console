@@ -72,8 +72,6 @@ namespace ConsoleGame.Objects
         {
             Vector2D vector_2 = new Vector2D(Center);
 
-//            bool firstFrame = true;
-
             switch (_state)
             {
                 case State.StandOnBoard:
@@ -107,7 +105,6 @@ namespace ConsoleGame.Objects
                             }
                             else // если мы воткнулись в низ
                             {
-                                _direction = new Vector2D(0, 0);
                                 // @TODO: окно проигрыша
 
                                 _score.Hp--;
@@ -115,6 +112,8 @@ namespace ConsoleGame.Objects
 
                                 if (_score.Hp > 0)
                                 {
+                                    _state = State.StandOnBoard;
+
                                     _board.Clear();
                                     Clear();
 
@@ -129,6 +128,7 @@ namespace ConsoleGame.Objects
                     }
                     else
                         _movingStep++;
+
                     break;
             }
 
@@ -160,6 +160,6 @@ namespace ConsoleGame.Objects
         /// <summary>
         /// Запуск движения
         /// </summary>
-        private void StartMoving() => _state = State.Moving;
+        private void StartMoving() =>  _state = State.Moving;
     }
 }
