@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Versioning;
 using System.Threading;
 
 namespace ConsoleGame
@@ -76,11 +77,21 @@ namespace ConsoleGame
         /// </summary>
         private void ReadFile()
         {
-            using (StreamReader sr = new StreamReader("./help.txt"))
-            {
-                String file = sr.ReadToEnd();
-                _content = file.Split('\n');
-            }
+            String file = "Арканоид\n"+
+            "\n"+
+            "Игрок контролирует небольшую платформу-ракетку, которую можно передвигать горизонтально от одной стенки до другой, подставляя её под шарик, предотвращая его падение вниз. Удар шарика по кирпичу приводит к разрушению кирпича.\n" +
+            "\n" +
+            "Клавиши:\n"+
+            "Стрелки вверх, вниз, вправо, влево - передвижение платформы-ракетки\n"+
+            "Esc, Q - выход из игры\n"+
+            "F1, ? - вызов этой подсказки\n" +
+            "\n" +
+            "Нажмите пробел, чтобы начать/продолжить к игре\n"+
+            "\n"+
+            "Автор:\n" +
+            "Атнагулов Артур, группа 11-607 КФУ ВШ ИТИС\n"+
+            "i@atnartur.ru";
+            _content = file.Split('\n');
         }
     }
 }
