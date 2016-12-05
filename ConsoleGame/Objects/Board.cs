@@ -34,7 +34,7 @@ namespace ConsoleGame.Objects
         public Board()
         {
             Renderer renderer = Renderer.Instance;
-            Center = new Vector2D(renderer.Width / 2, 0);
+            Center = new Vector2D(renderer.Width / 2, 3);
             renderer.Bindings.Add(ConsoleKey.UpArrow, Up);
             renderer.Bindings.Add(ConsoleKey.DownArrow, Down);
             renderer.Bindings.Add(ConsoleKey.LeftArrow, Left);

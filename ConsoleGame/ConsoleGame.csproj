@@ -48,6 +48,7 @@
     <Compile Include="Objects\Blocks.cs" />
     <Compile Include="Objects\Board.cs" />
     <Compile Include="Objects\IObject.cs" />
+    <Compile Include="Objects\Score.cs" />
     <Compile Include="Renderer.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

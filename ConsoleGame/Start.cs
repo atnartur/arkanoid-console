@@ -28,10 +28,12 @@ namespace ConsoleGame
             Board board = new Board();
             Ball ball = new Ball(board);
             Blocks blocks = new Blocks(ball);
+            Score score = new Score();
 
             renderer.Scene.Add(ball);
             renderer.Scene.Add(board);
             renderer.Scene.Add(blocks);
+            renderer.Scene.Add(score);
 
             Help help = new Help();
             help.Show();
