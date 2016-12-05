@@ -80,7 +80,7 @@ namespace ConsoleGame.Objects
                             vector_2.Y >= Renderer.Instance.Height - 1
                         )
                         {
-                            _direction = ChangeDirection();
+                            ChangeDirection();
                         }
                         else if (vector_2.Y <= 2)
                         {
@@ -106,7 +106,7 @@ namespace ConsoleGame.Objects
             }
         }
 
-        public Vector2D ChangeDirection()
+        public void ChangeDirection()
         {
             Vector2D v = new Vector2D(_direction);
 
@@ -119,7 +119,7 @@ namespace ConsoleGame.Objects
             else
                 v = new Vector2D(1, 1);
 
-            return v;
+            _direction = v;
         }
 
         /// <summary>

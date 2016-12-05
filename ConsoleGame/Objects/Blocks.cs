@@ -51,7 +51,7 @@ namespace ConsoleGame.Objects
             {
                 for (int i = Dots.Count - 1; i >= 0; i--)
                 {
-                    if (_ball.Center.X == Dots[i].X)
+                    if (_ball.Center.X == Dots[i].X && Dots[i].Y == _ball.Center.Y + 1)
                     {
                         _ball.ChangeDirection();
                         _ball.ChangeDirection();
