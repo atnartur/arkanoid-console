@@ -44,7 +44,9 @@ namespace ConsoleGame.Objects
         {
             Renderer renderer = Renderer.Instance;
             renderer.SetCursorPosition(_numberCursorPosition);
+            renderer.BackgroundColor(ConsoleColor.Black);
             renderer.Write(Count);
+            renderer.ResetBackgroundColor();
         }
     }
 }

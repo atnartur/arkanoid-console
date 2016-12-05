@@ -270,5 +270,6 @@ namespace ConsoleGame
         /// <param name="line"></param>
         public void Write(string line) => Console.Write(line);
         public void Write(int line) => Console.Write(line);
+        public void BackgroundColor(ConsoleColor color) => Console.BackgroundColor = color;
     }
 }
