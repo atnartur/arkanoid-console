@@ -1,1 +1,1 @@
-﻿mcs *.cs -v -out:s.exe && mono s.exe
+﻿mcs **.cs **/**.cs -v -out:s.exe && mono s.exe

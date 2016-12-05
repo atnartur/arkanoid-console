@@ -1,4 +1,5 @@
 ﻿using System;
+using ConsoleGame.Objects;
 
 namespace ConsoleGame
 {
@@ -25,9 +26,11 @@ namespace ConsoleGame
             Renderer renderer = Renderer.Instance;
 
             Board board = new Board();
-            Ball ball = new Ball(board);
-            Blocks blocks = new Blocks(ball);
+            Score score = new Score();
+            Ball ball = new Ball(board, score);
+            Blocks blocks = new Blocks(ball, score);
 
+            renderer.Scene.Add(score);
             renderer.Scene.Add(ball);
             renderer.Scene.Add(board);
             renderer.Scene.Add(blocks);

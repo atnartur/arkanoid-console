@@ -1,4 +1,4 @@
-﻿namespace ConsoleGame
+﻿namespace ConsoleGame.Objects
 {
     /// <summary>
     /// Интерфейс для графических объектов

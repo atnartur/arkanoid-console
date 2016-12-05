@@ -41,13 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ball.cs" />
-    <Compile Include="Blocks.cs" />
-    <Compile Include="Board.cs" />
     <Compile Include="Help.cs" />
-    <Compile Include="IObject.cs" />
     <Compile Include="KeyBindings.cs" />
     <Compile Include="KeyHandlers.cs" />
+    <Compile Include="Objects\Ball.cs" />
+    <Compile Include="Objects\Blocks.cs" />
+    <Compile Include="Objects\Board.cs" />
+    <Compile Include="Objects\IObject.cs" />
+    <Compile Include="Objects\Score.cs" />
     <Compile Include="Renderer.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

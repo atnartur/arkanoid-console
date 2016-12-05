@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ConsoleGame.Objects;
 
 namespace ConsoleGame
 {
@@ -109,6 +110,7 @@ namespace ConsoleGame
 
                 for (int i = 0; i < Scene.Count; i++)
                 {
+//                    Console.Read();
                     ((IObject) Scene[i]).Render();
                 }
 
@@ -180,11 +182,12 @@ namespace ConsoleGame
         /// <param name="line">Текст</param>
         /// <param name="margin_left">Отступ от краев консоли</param>
         /// <param name="bg_color">фоновый цвет</param>
-        public void PrintLineWithMargin(String line, int margin_left, ConsoleColor bg_color = 0)
+        public void PrintLineWithMargin(String line, int margin_left, ConsoleColor bg_color = 0, bool no_br = false)
         {
             if (margin_left < 0)
                 margin_left = 0;
 
+            // @TODO: как проверить цвет на пустоту?
             if (bg_color != _backgroundColor)
                 Console.BackgroundColor = bg_color;
 
@@ -238,7 +241,8 @@ namespace ConsoleGame
                 for(int i = 0; i < Width - margin_left - line.Length; i++)
                     Console.Write(' ');
 
-                Console.WriteLine();
+                if(!no_br)
+                    Console.WriteLine();
             }
 
             ResetBackgroundColor();
@@ -252,5 +256,25 @@ namespace ConsoleGame
         /// <param name="bg_color"></param>
         public void PrintLineOnCenter(String line, ConsoleColor bg_color = 0)
             => PrintLineWithMargin(line, (this.Width - line.Length) / 2, bg_color);
+
+        /// <summary>
+        /// Установка позиции курсора
+        /// </summary>
+        /// <param name="a"></param>
+        public void SetCursorPosition(Vector2D a) => Console.SetCursorPosition(a.X, Height - 1 - a.Y);
+
+
+        /// <summary>
+        /// Пишет текст
+        /// </summary>
+        /// <param name="line"></param>
+        public void Write(string line) => Console.Write(line);
+        public void Write(int line) => Console.Write(line);
+
+        /// <summary>
+        /// Устанавливает фоновый цвет
+        /// </summary>
+        /// <param name="color"></param>
+        public void BackgroundColor(ConsoleColor color) => Console.BackgroundColor = color;
     }
 }
