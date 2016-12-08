@@ -26,6 +26,10 @@ namespace ConsoleGame
         /// </summary>
         public void Show()
         {
+            Console.Beep(392, 1600);
+            Console.Beep(392, 1600);
+            Console.Beep(392, 1600);
+
             Renderer renderer = Renderer.Instance;
             renderer.Stop();
 

@@ -10,6 +10,7 @@ namespace ConsoleGame
         /// </summary>
         public static void StartGame()
         {
+            Console.Beep(392, 1600);
             Renderer renderer = Renderer.Instance;
             renderer.DrawCanvas();
             renderer.Start();

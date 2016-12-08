@@ -65,6 +65,7 @@ namespace ConsoleGame.Objects
                         Renderer.Instance.FillRect(' ', Dots[i]);
                         _score.Count++;
                         Dots.RemoveAt(i);
+                        Console.Beep(392, 1600);
                         break;
                     }
                 }
