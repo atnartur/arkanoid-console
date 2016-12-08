@@ -99,37 +99,36 @@ namespace ConsoleGame.Objects
                             Direction *= new Vector2D(1, -1); // инвертируем координату направления движения по У
 
                         // если мы приблизились к низу
-                        else if (vector_2.Y <= 3)
+                        // если мы воткнулись в доску
+                        else if (
+                            vector_2.Y <= 6 &&
+                            vector_2.Y == _board.Center.Y + 1 &&
+                            vector_2.X >= _board.Center.X - _board.Size &&
+                            vector_2.X <= _board.Center.X + _board.Size
+                        )
                         {
-                            // если мы воткнулись в доску
-                            if (
-                                vector_2.Y == _board.Center.Y + 1 &&
-                                vector_2.X >= _board.Center.X - _board.Size &&
-                                vector_2.X <= _board.Center.X + _board.Size
-                            )
+                            if (Direction.Equals(new Vector2D(1, -1)))
+                                Direction = new Vector2D(1, 1);
+                            else if (Direction.Equals(new Vector2D(-1, -1)))
+                                Direction = new Vector2D(-1, 1);
+
+                        }
+                        else if (vector_2.Y <= 3) // если мы воткнулись в низ
+                        {
+                            // @TODO: окно проигрыша
+
+                            _score.Hp--;
+                            _state = State.Stop;
+
+                            if (_score.Hp > 0)
                             {
-                                if (Direction.Equals(new Vector2D(1, -1)))
-                                    Direction = new Vector2D(1, 1);
-                                else if (Direction.Equals(new Vector2D(-1, -1)))
-                                    Direction = new Vector2D(-1, 1);
-                            }
-                            else // если мы воткнулись в низ
-                            {
-                                // @TODO: окно проигрыша
+                                _state = State.StandOnBoard;
 
-                                _score.Hp--;
-                                _state = State.Stop;
+                                _board.Clear();
+                                Clear();
 
-                                if (_score.Hp > 0)
-                                {
-                                    _state = State.StandOnBoard;
-
-                                    _board.Clear();
-                                    Clear();
-
-                                    _board.ResetPosition();
-                                    ResetPosition();
-                                }
+                                _board.ResetPosition();
+                                ResetPosition();
                             }
                         }
                         vector_2 += Direction;
