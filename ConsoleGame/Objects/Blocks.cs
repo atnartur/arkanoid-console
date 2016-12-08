@@ -60,8 +60,7 @@ namespace ConsoleGame.Objects
             {
                 for (int i = Dots.Count - 1; i >= 0; i--)
                 {
-                    if (_ball.Center.X == Dots[i].X && _ball.Center.Y + 1 == Dots[i].Y)
-                    {
+                    if (_ball.Center.X == Dots[i].X && _ball.Center.Y + 1 == Dots[i].Y){
                         _ball.ChangeDirection();
                         Renderer.Instance.FillRect(' ', Dots[i]);
                         _score.Count++;

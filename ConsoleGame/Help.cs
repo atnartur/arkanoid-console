@@ -42,8 +42,7 @@ namespace ConsoleGame
 
             renderer.DrawCanvas();
 
-            Console.SetCursorPosition(0, margin_top);
-
+            renderer.SetCursorPosition(new Vector2D(0, renderer.Height - margin_top));
             renderer.PrintLineOnCenter(_content[0], ConsoleColor.Green);
 
             for (int i = 1; i < _content.Length; i++)
