@@ -22,7 +22,7 @@ namespace ConsoleGame
         }
 
         /// <summary>
-        /// Отображение подсказки
+        /// Отображение
         /// </summary>
         public void Show()
         {

@@ -115,8 +115,6 @@ namespace ConsoleGame.Objects
                         }
                         else if (vector_2.Y <= 3) // если мы воткнулись в низ
                         {
-                            // @TODO: окно проигрыша
-
                             _score.Hp--;
                             _state = State.Stop;
 
@@ -125,12 +123,12 @@ namespace ConsoleGame.Objects
                                 _state = State.StandOnBoard;
 
                                 _board.Clear();
-                                Clear();
+                                this.Clear();
 
                                 _board.ResetPosition();
-                                ResetPosition();
+                                this.ResetPosition();
                             }
-                            else
+                            else // отбражение финального экрана, если у нас не осталось жизней
                             {
                                 FinalScreen screen = new FinalScreen(_score);
                                 screen.Show();
@@ -147,8 +145,9 @@ namespace ConsoleGame.Objects
             }
 
 
-            if (!vector_2.Equals(Center))
+            if (!vector_2.Equals(Center)) // если вектор изменился
             {
+                // реагируем на это
                 Renderer.Instance.FillRect(' ', Center);
                 Renderer.Instance.FillRect(_symbol, vector_2);
                 Center = vector_2;
