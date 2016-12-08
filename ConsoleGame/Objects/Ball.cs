@@ -88,7 +88,7 @@ namespace ConsoleGame.Objects
                     vector_2 = _board.Center + new Vector2D(0, 1);
                     break;
                 case State.Moving:
-                    if (_movingStep > 1000)
+                    if (_movingStep > 1000 && _score.Hp > 0)
                     {
                         // если мы уткнулись в правую или левую стенки
                         if(vector_2.X >= Renderer.Instance.Width - 1 || vector_2.X <= 0)
