@@ -160,12 +160,12 @@ namespace ConsoleGame.Objects
 
             if(v.X == 1 && v.Y == 1)
                 v = new Vector2D(1, -1);
-            else if(v.X == -1 && v.Y == 1)
+            else if(v.X == 1 && v.Y == -1)
                 v = new Vector2D(-1, -1);
             else if(v.X == -1 && v.Y == -1)
-                v = new Vector2D(1, 1);
-            else
                 v = new Vector2D(-1, 1);
+            else if(v.X == -1 && v.Y == 1)
+                v = new Vector2D(1, -1);
 
             Direction = v;
         }
