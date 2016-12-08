@@ -35,7 +35,7 @@ namespace ConsoleGame.Objects
         /// <summary>
         /// Направление движения шарика
         /// </summary>
-        private Vector2D _direction = new Vector2D(1, 1);
+        public Vector2D Direction { get; private set; }
 
         /// <summary>
         /// Доска
@@ -60,6 +60,7 @@ namespace ConsoleGame.Objects
         {
             _board = board;
             _score = score;
+            Direction = new Vector2D(1, 1);
             ResetPosition();
             Renderer.Instance.Bindings.Add(ConsoleKey.Spacebar, StartMoving);
         }
@@ -91,11 +92,11 @@ namespace ConsoleGame.Objects
                     {
                         // если мы уткнулись в правую или левую стенки
                         if(vector_2.X >= Renderer.Instance.Width - 1 || vector_2.X <= 0)
-                            _direction *= new Vector2D(-1, 1); // инвертируем координату направления движения по Х
+                            Direction *= new Vector2D(-1, 1); // инвертируем координату направления движения по Х
 
                         // если мы уткнулись вверх
                         else if (vector_2.Y >= Renderer.Instance.Height - 1)
-                            _direction *= new Vector2D(1, -1); // инвертируем координату направления движения по У
+                            Direction *= new Vector2D(1, -1); // инвертируем координату направления движения по У
 
                         // если мы приблизились к низу
                         else if (vector_2.Y <= 3)
@@ -107,10 +108,10 @@ namespace ConsoleGame.Objects
                                 vector_2.X <= _board.Center.X + _board.Size
                             )
                             {
-                                if (_direction.Equals(new Vector2D(1, -1)))
-                                    _direction = new Vector2D(1, 1);
-                                else if (_direction.Equals(new Vector2D(-1, -1)))
-                                    _direction = new Vector2D(-1, 1);
+                                if (Direction.Equals(new Vector2D(1, -1)))
+                                    Direction = new Vector2D(1, 1);
+                                else if (Direction.Equals(new Vector2D(-1, -1)))
+                                    Direction = new Vector2D(-1, 1);
                             }
                             else // если мы воткнулись в низ
                             {
@@ -131,7 +132,7 @@ namespace ConsoleGame.Objects
                                 }
                             }
                         }
-                        vector_2 += _direction;
+                        vector_2 += Direction;
 
                         _movingStep = 0;
                     }
@@ -155,18 +156,18 @@ namespace ConsoleGame.Objects
         /// </summary>
         public void ChangeDirection()
         {
-            Vector2D v = new Vector2D(_direction);
+            Vector2D v = new Vector2D(Direction);
 
             if(v.X == 1 && v.Y == 1)
                 v = new Vector2D(1, -1);
             else if(v.X == -1 && v.Y == 1)
-                v = new Vector2D(-1, 1);
+                v = new Vector2D(-1, -1);
             else if(v.X == -1 && v.Y == -1)
                 v = new Vector2D(1, 1);
             else
-                v = new Vector2D(-1, -1);
+                v = new Vector2D(-1, 1);
 
-            _direction = v;
+            Direction = v;
         }
 
         /// <summary>

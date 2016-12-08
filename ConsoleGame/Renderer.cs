@@ -187,7 +187,6 @@ namespace ConsoleGame
             if (margin_left < 0)
                 margin_left = 0;
 
-            // @TODO: как проверить цвет на пустоту?
             if (bg_color != _backgroundColor)
                 Console.BackgroundColor = bg_color;
 
