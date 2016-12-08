@@ -130,6 +130,11 @@ namespace ConsoleGame.Objects
                                 _board.ResetPosition();
                                 ResetPosition();
                             }
+                            else
+                            {
+                                FinalScreen screen = new FinalScreen(_score);
+                                screen.Show();
+                            }
                         }
                         vector_2 += Direction;
 

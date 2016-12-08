@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FinalScreen.cs" />
     <Compile Include="Help.cs" />
     <Compile Include="KeyBindings.cs" />
     <Compile Include="KeyHandlers.cs" />
