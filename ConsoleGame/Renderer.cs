@@ -275,5 +275,7 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="color"></param>
         public void BackgroundColor(ConsoleColor color) => Console.BackgroundColor = color;
+
+        public void Beep(int freq = 392, int duration = 100) => Console.Beep(freq, duration);
     }
 }
