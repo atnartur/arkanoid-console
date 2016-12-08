@@ -112,6 +112,7 @@ namespace ConsoleGame.Objects
                             else if (Direction.Equals(new Vector2D(-1, -1)))
                                 Direction = new Vector2D(-1, 1);
 
+                            Console.Beep(392, 1600);
                         }
                         else if (vector_2.Y <= 3) // если мы воткнулись в низ
                         {
@@ -127,6 +128,7 @@ namespace ConsoleGame.Objects
 
                                 _board.ResetPosition();
                                 this.ResetPosition();
+                                Console.Beep(392, 1600);
                             }
                             else // отбражение финального экрана, если у нас не осталось жизней
                             {
