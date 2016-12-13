@@ -29,6 +29,10 @@ namespace ConsoleGame
             Renderer renderer = Renderer.Instance;
             renderer.Stop();
 
+            renderer.Beep();
+            renderer.Beep();
+            renderer.Beep();
+
             int margin_top = (renderer.Height - 6) / 2;
 
             if (margin_top < 0)
@@ -39,10 +43,10 @@ namespace ConsoleGame
             renderer.PrintLineOnCenter("G A M E   O V E R", ConsoleColor.Red);
             renderer.PrintLineOnCenter("Your scores: " + _score.Count, ConsoleColor.Black);
             renderer.PrintLineOnCenter("", ConsoleColor.Black);
-            renderer.PrintLineOnCenter("Press any key to exit", ConsoleColor.Black);
+            renderer.PrintLineOnCenter("Press ESCAPE key to exit", ConsoleColor.Black);
             renderer.PrintLineOnCenter("", ConsoleColor.Black);
 
-            Console.Read();
+            while (Console.ReadKey(true).Key != ConsoleKey.Escape){}
         }
     }
 }

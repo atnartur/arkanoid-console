@@ -1,1 +1,1 @@
-﻿mcs **.cs **/**.cs -v -out:s.exe && mono s.exe
+﻿mcs -v -out:s.exe -target:winexe **.cs **/**.cs && mono s.exe

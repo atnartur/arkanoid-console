@@ -93,7 +93,23 @@ namespace ConsoleGame
             return res;
         }
 
+
+        /// <summary>
+        /// Умножение векторов на цифру
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static Vector2D Mult(Vector2D a, int num)
+        {
+            Vector2D res = new Vector2D(a);
+            res.X *= num;
+            res.Y *= num;
+            return res;
+        }
+
         public static Vector2D operator +(Vector2D a, Vector2D b) => Sum(a, b);
         public static Vector2D operator *(Vector2D a, Vector2D b) => Mult(a, b);
+        public static Vector2D operator *(Vector2D a, int num) => Mult(a, num);
     }
 }
