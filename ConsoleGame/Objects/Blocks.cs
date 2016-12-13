@@ -39,6 +39,13 @@ namespace ConsoleGame.Objects
         public Vector2D BossCenter { get; private set; }
 
         /// <summary>
+        /// Шаг анимации бота
+        /// </summary>
+        private int _bossMovingStep = 0;
+
+        private Vector2D _bossRotate = new Vector2D(1, 0);
+
+        /// <summary>
         /// Инициализация блоков
         /// </summary>
         /// <param name="ball">Шарик</param>
@@ -57,12 +64,31 @@ namespace ConsoleGame.Objects
         /// </summary>
         public void Render()
         {
+            Renderer renderer = Renderer.Instance;
+
             if (_renderedDots != Dots)
             {
                 foreach (Vector2D Dot in Dots)
-                    Renderer.Instance.FillRect('*', Dot);
+                    renderer.FillRect('*', Dot);
                 _renderedDots = Dots;
             }
+
+            if (_bossMovingStep > 4500)
+            {
+                _bossRotate *= -1;
+
+                for (int i = 0; i < Dots.Count; i++)
+                {
+                    renderer.FillRect(' ', Dots[i]);
+                    Dots[i] += _bossRotate;
+                }
+
+                _renderedDots = new List<Vector2D>();
+
+                _bossMovingStep = 0;
+            }
+            else
+                _bossMovingStep++;
 
             if (_ball.Center.Y >= _bottomLine - 1)
             {

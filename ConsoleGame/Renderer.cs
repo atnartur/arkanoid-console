@@ -46,7 +46,7 @@ namespace ConsoleGame
         public KeyBindings Bindings = new KeyBindings();
 
         /// <summary>
-        /// Объекты на сцвене
+        /// Объекты на сцене
         /// </summary>
         public List<IObject> Scene = new List<IObject>();
 
