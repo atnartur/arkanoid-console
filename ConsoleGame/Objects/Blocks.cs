@@ -31,7 +31,7 @@ namespace ConsoleGame.Objects
         /// <summary>
         /// Позиция нижней линии
         /// </summary>
-        private readonly int _bottomLine = Renderer.Instance.Height * 3 / 4;
+        private readonly int _bottomLine = Renderer.Instance.Height * 3 / 5;
 
         /// <summary>
         /// Инициализация блоков
@@ -41,7 +41,8 @@ namespace ConsoleGame.Objects
         {
             _ball = ball;
             _score = score;
-            Generate();
+            Dots = new List<Vector2D>();
+            GenerateBoss();
         }
 
         /// <summary>
@@ -75,12 +76,38 @@ namespace ConsoleGame.Objects
         /// <summary>
         /// генерация точек
         /// </summary>
-        public void Generate()
+        public void GenerateField()
         {
-            Dots = new List<Vector2D>();
             for (int x = 0; x < Renderer.Instance.Width; x++)
                 for (int y = Renderer.Instance.Height - 1; y >= _bottomLine; y--)
                     Dots.Add(new Vector2D(x, y));
+        }
+
+        public void GenerateBoss()
+        {
+            Renderer renderer = Renderer.Instance;
+
+            int[] linesLength = new int[renderer.Height - 1 - _bottomLine];
+
+            linesLength[0] = 1;
+
+            for (int i = 1; i < linesLength.Length - 1; i++)
+                linesLength[i] = linesLength[i - 1] + (renderer.Width - 1) / linesLength.Length * i;
+
+            for (int i = 0; i < linesLength.Length - 1; i++)
+            {
+                int y = renderer.Height - 1 - i;
+                int left  = (renderer.Width - 1) / 2 - linesLength[i] / 2;
+                int right = (renderer.Width - 1) / 2 + linesLength[i] / 2;
+
+                if (left < 0)
+                    left = 0;
+                if (right > renderer.Width - 1)
+                    right = renderer.Width - 1;
+
+                for(int x = left; x <= right; x++)
+                    Dots.Add(new Vector2D(x, y));
+            }
         }
     }
 }
