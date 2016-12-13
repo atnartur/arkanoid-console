@@ -43,7 +43,7 @@ namespace ConsoleGame.Objects
         /// </summary>
         private int _bossMovingStep = 0;
 
-        private Vector2D _bossRotate = new Vector2D(1, 0);
+        private Vector2D _bossRotate;
 
         /// <summary>
         /// Инициализация блоков
@@ -56,6 +56,12 @@ namespace ConsoleGame.Objects
             Dots = new List<Vector2D>();
             Renderer renderer = Renderer.Instance;
             BossCenter = new Vector2D(renderer.Width / 2, renderer.Height - 1);
+
+            int rotate_step = renderer.Width / 10;
+            if (rotate_step == 0)
+                rotate_step = 1;
+
+            _bossRotate = new Vector2D(rotate_step);
             GenerateBoss();
         }
 
