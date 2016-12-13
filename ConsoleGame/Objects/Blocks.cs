@@ -83,7 +83,7 @@ namespace ConsoleGame.Objects
                     Dots.Add(new Vector2D(x, y));
         }
 
-        public void GenerateBoss()
+        public void GenerateTree()
         {
             Renderer renderer = Renderer.Instance;
 
@@ -108,6 +108,31 @@ namespace ConsoleGame.Objects
                 for(int x = left; x <= right; x++)
                     Dots.Add(new Vector2D(x, y));
             }
+        }
+
+        public void GenerateBoss()
+        {
+            Renderer renderer = Renderer.Instance;
+
+            Dots.Add(new Vector2D(renderer.Width / 2, renderer.Height - 1));
+
+            int y = renderer.Height - 2;
+            for(int x = renderer.Width * 2 / 6; x <= renderer.Width * 4 / 6; x++)
+                Dots.Add(new Vector2D(x, y));
+
+            y = renderer.Height - 3;
+            for(int x = renderer.Width * 1 / 6; x <= renderer.Width * 5 / 6; x++)
+                Dots.Add(new Vector2D(x, y));
+
+            y = renderer.Height - 4;
+            for(int x = renderer.Width * 2 / 6; x <= renderer.Width * 4 / 6; x++)
+                Dots.Add(new Vector2D(x, y));
+
+            y = renderer.Height - 5;
+            for(int x = renderer.Width * 5 / 12; x <= renderer.Width * 7 / 12; x++)
+                Dots.Add(new Vector2D(x, y));
+
+            Dots.Add(new Vector2D(renderer.Width / 2, renderer.Height - 6));
         }
     }
 }
