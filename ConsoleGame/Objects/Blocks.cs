@@ -79,22 +79,7 @@ namespace ConsoleGame.Objects
                 _renderedDots = Dots;
             }
 
-            if (_bossMovingStep > 4500)
-            {
-                _bossRotate *= -1;
-
-                for (int i = 0; i < Dots.Count; i++)
-                {
-                    renderer.FillRect(' ', Dots[i]);
-                    Dots[i] += _bossRotate;
-                }
-
-                _renderedDots = new List<Vector2D>();
-
-                _bossMovingStep = 0;
-            }
-            else
-                _bossMovingStep++;
+             MoveBoss();
 
             if (_ball.Center.Y >= _bottomLine - 1)
             {
@@ -174,6 +159,27 @@ namespace ConsoleGame.Objects
             BossLine(BossCenter.X - size3, BossCenter.X + size3, y--);
             BossLine(BossCenter.X - size2, BossCenter.X + size2, y--);
             BossLine(BossCenter.X - size1, BossCenter.X + size1, y--);
+        }
+
+        public void MoveBoss(){
+            Renderer renderer = Renderer.Instance;
+
+            if (_bossMovingStep > 4500)
+            {
+                _bossRotate *= -1;
+
+                for (int i = 0; i < Dots.Count; i++)
+                {
+                    renderer.FillRect(' ', Dots[i]);
+                    Dots[i] += _bossRotate;
+                }
+
+                _renderedDots = new List<Vector2D>();
+
+                _bossMovingStep = 0;
+            }
+            else
+                _bossMovingStep++;
         }
     }
 }
