@@ -62,7 +62,7 @@ namespace ConsoleGame.Objects
                 rotate_step = 1;
 
             _bossRotate = new Vector2D(rotate_step);
-            GenerateField();
+            GenerateBoss();
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace ConsoleGame.Objects
                 _renderedDots = Dots;
             }
 
-            // MoveBoss();
+             MoveBoss();
 
             if (_ball.Center.Y >= _bottomLine - 1)
             {
